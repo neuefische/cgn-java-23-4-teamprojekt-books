@@ -35,4 +35,23 @@ public class BookServiceTest {
         Mockito.verifyNoMoreInteractions(booksRepo);
     }
 
+    @Test
+    public void deleteToDoTest(){
+        //GIVEN
+        Mockito.when(booksRepo.findBookById(Mockito.any())).thenReturn(
+                new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"));
+
+        BookService toDoService = new BookService(booksRepo);
+
+        //WHEN
+        Book actual = toDoService.deleteBookById("1");
+
+        //THEN
+        assertEquals(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"), actual);
+
+        Mockito.verify(booksRepo, Mockito.times(1)).findBookById(Mockito.any());
+        Mockito.verify(booksRepo, Mockito.times(1)).delete(Mockito.any());
+        Mockito.verifyNoMoreInteractions(booksRepo);
+    }
+
 }

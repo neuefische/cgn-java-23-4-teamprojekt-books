@@ -11,9 +11,17 @@ function App() {
     axios.get("/api/books").then(response => setBooks(response.data))
   }, [])
 
+  const deleteBook = (id: string) => {
+    axios.delete(`/api/books/${id}`)
+        .then(response => {
+          setBooks([...books.filter(book => id !== book.id)]);
+          return console.log(response.data)
+        })
+  }
+
   return (
     <>
-      <ViewAllBooks books={books} />
+      <ViewAllBooks books={books} handleBookDelete={deleteBook} />
     </>
   )
 }
