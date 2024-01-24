@@ -2,6 +2,7 @@ package de.neuefische.team2.backend.controller;
 
 import de.neuefische.team2.backend.models.Book;
 import de.neuefische.team2.backend.repos.BooksRepo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,14 +36,102 @@ public class BookControllerIntegrationTest {
         //WHEN
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books"))
 
-        //THEN
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        [{
+                             "id": "1",
+                             "title": "Harry Potter und der Stein der Weisen",
+                             "author": "J.K. Rowling"
+                         }]
+                        """))
+                .andReturn();
+
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
+    }
+
+    @Test
+    void updateBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
+        //GIVEN
+        booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"));
+
+        //WHEN
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put("/api/books/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                                                
+                                    {
+                                    "id":"1",
+                                    "title":"Harry Potter und der Stein der Weisen",
+                                    "author":"JayKay Rowling"
+                                    }
+                                     
+                                """))
+
+                //THEN
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
-                                [{
+                        {
+                             "id": "1",
+                             "title": "Harry Potter und der Stein der Weisen",
+                             "author": "JayKay Rowling"
+                         }
+                        """))
+                .andReturn();
+
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
+    }
+
+    @Test
+    void getBookByIdTest_shouldReturnObjectWithTheId() throws Exception {
+        //GIVEN
+        Book book = booksRepo.save(new Book("1", "Title", "Author"));
+        String id = book.id();
+        //WHEN
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books/{id}", id))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {
+                        "id":"1",
+                        "title":"Title",
+                        "author":"Author"
+                        }
+                        """))
+                .andReturn();
+        Assertions.assertEquals(mvcResult.getResponse().getStatus(), 200);
+
+    }
+    @Test
+    void getBookByNoExistingIdTest_shouldReturnNoObject() throws Exception {
+        //GIVEN
+        Book book = booksRepo.save(new Book("1", "Title", "Author"));
+        String nonExistingId = "nonExistingId";
+        //WHEN
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books/{id}", nonExistingId))
+                //THEN
+                .andExpect(status().isNotFound())
+                .andReturn();
+        Assertions.assertEquals(mvcResult.getResponse().getStatus(), 404);
+
+    }
+    @DirtiesContext
+    @Test
+    void deleteBook_shouldReturnBook_whenThisObjectWasDeletedFromRepository() throws Exception {
+        //GIVEN
+        booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"));
+
+        //WHEN
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete("/api/books/1"))
+
+                //THEN
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                                {
                                      "id": "1",
                                      "title": "Harry Potter und der Stein der Weisen",
                                      "author": "J.K. Rowling"
-                                 }]
+                                 }
                                 """))
                 .andReturn();
 
