@@ -1,5 +1,5 @@
 import {Book} from "../types/Book.ts";
-import {ViewBook} from "./view-book.tsx";
+import {BookElement} from "./book-element.tsx";
 
 type ViewAllBooksProps = {
     books: Book[]
@@ -9,7 +9,7 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({books}) => {
 
     return (
         <div className="books">
-            {books.map(book => (<ViewBook key={book.id} book={book}/>))}
+            {books.map(book => (<BookElement key={book.id} book={book}/>))}
         </div>
     );
 
