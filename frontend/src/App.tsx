@@ -18,9 +18,10 @@ function App() {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
 
-const addBook =(bookToSave:Book)=>{
-    setBooks([...books, bookToSave ])
-}
+    const addBook =(bookToSave : Book)=>{
+         setBooks([...books, bookToSave ])
+         axios.post("/api/books", bookToSave).then(response => console.log(response.data))
+    }
 
   const deleteBook = (id: string) => {
     axios.delete(`/api/books/${id}`)

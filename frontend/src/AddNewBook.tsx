@@ -22,11 +22,13 @@ export default function AddNewBook(props : AddNewBookProps){
 
     const onBookSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
         const bookToSave: Book = {
             id : "1",
             title: title,
             author: author,
         }
+
         props.saveBook(bookToSave)
 
         setTitle("")
