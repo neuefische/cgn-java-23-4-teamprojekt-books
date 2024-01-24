@@ -1,4 +1,4 @@
-import {Book} from "./Book.ts";
+import {Book} from "./types/Book.ts";
 
 import {ChangeEvent, FormEvent, useState} from "react";
 
@@ -23,7 +23,7 @@ export default function AddNewBook(props : AddNewBookProps){
     const onBookSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const bookToSave: Book = {
-            id : 1,
+            id : "1",
             title: title,
             author: author,
         }
