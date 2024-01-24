@@ -25,4 +25,10 @@ public class BookService {
     }
     public Book getById(String id){return booksRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "No book with such id!"));
     }
+
+    public Book deleteBookById(String id) {
+        Book bookToDelete = getById(id);
+        booksRepo.delete(bookToDelete);
+        return bookToDelete;
+    }
 }

@@ -16,6 +16,13 @@ function App() {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
 
+  const deleteBook = (id: string) => {
+    axios.delete(`/api/books/${id}`)
+        .then(response => {
+          setBooks([...books.filter(book => id !== book.id)]);
+          return console.log(response.data)
+        })
+  }
 
     const editBook = (book: Book): void => {
         axios.put(`/api/books/${book.id}`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
@@ -26,7 +33,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
-                <Route path="/books/:id" element={<ViewBook/>}/>
+                <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
             </Routes>
         </>

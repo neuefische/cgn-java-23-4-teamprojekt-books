@@ -52,7 +52,7 @@ public class BookControllerIntegrationTest {
     }
 
     @Test
-    void getBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
+    void updateBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
         //GIVEN
         booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"));
 
@@ -116,4 +116,27 @@ public class BookControllerIntegrationTest {
         Assertions.assertEquals(mvcResult.getResponse().getStatus(), 404);
 
     }
+    @DirtiesContext
+    @Test
+    void deleteBook_shouldReturnBook_whenThisObjectWasDeletedFromRepository() throws Exception {
+        //GIVEN
+        booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"));
+
+        //WHEN
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete("/api/books/1"))
+
+                //THEN
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                                {
+                                     "id": "1",
+                                     "title": "Harry Potter und der Stein der Weisen",
+                                     "author": "J.K. Rowling"
+                                 }
+                                """))
+                .andReturn();
+
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
+    }
+
 }
