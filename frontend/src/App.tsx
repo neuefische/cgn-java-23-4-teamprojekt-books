@@ -13,17 +13,17 @@ function App() {
   useEffect(() => {
     axios.get("/api/books").then(response => setBooks(response.data))
   }, [])
-
 const addBook =(bookToSave:Book)=>{
     setBooks([...books, bookToSave ])
 }
 
-
   return (
     <>
+
       <ViewAllBooks books={books} />
       <Routes>
          <Route path={"/add/book"} element={<AddNewBook saveBook={addBook}/>}/>
+
       </Routes>
     </>
   )

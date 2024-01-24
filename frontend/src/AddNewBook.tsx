@@ -6,6 +6,7 @@ import {ChangeEvent, FormEvent, useState} from "react";
     saveBook: (bookToSave: Book) => void
 }
 
+
 export default function AddNewBook(props : AddNewBookProps){
 
     const [title, setTitle] = useState<string>("")
@@ -29,6 +30,7 @@ export default function AddNewBook(props : AddNewBookProps){
             title: title,
             author: author,
         }
+
 
         props.saveBook(bookToSave)
 

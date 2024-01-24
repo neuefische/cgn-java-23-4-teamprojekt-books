@@ -7,5 +7,6 @@ public record BookDto(
         String author
 /*        String genre,
         String publication_date*/
-        ) {
+        )
+{
 }

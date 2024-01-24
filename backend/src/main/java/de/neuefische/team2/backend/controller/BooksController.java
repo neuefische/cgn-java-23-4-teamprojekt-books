@@ -22,10 +22,8 @@ public class BooksController {
 
     @PostMapping
     public Book addBook(@RequestBody BookDto bookDto){
-      return bookService.addBook(bookDto);
+        return bookService.addBook(bookDto);
     }
-
-
 
 
 

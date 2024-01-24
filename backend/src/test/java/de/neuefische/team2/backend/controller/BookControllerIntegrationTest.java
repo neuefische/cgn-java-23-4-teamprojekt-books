@@ -72,6 +72,7 @@ public class BookControllerIntegrationTest {
                       "author": "J.K. Rowling"
                   }
                 """))
+
                 .andExpect(jsonPath("$.id").isNotEmpty());
 
     }

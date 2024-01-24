@@ -26,9 +26,7 @@ public class BookService {
     public Book addBook(BookDto bookDto){
 
         String id = idService.newId();
-
         Book book = new Book(id, bookDto.title(), bookDto.author());
-
         return booksRepo.save(book);
     }
 

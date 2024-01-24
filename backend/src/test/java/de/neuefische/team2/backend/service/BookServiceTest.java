@@ -44,11 +44,13 @@ public class BookServiceTest {
         BookDto bookDto = new BookDto("Harry Potter und der Stein der Weisen", "J.K. Rowling");
         Book book = new Book("test-id","Harry Potter und der Stein der Weisen", "J.K. Rowling");
 
+
         // GIVEN
         Mockito.when(booksRepo.save(book)).thenReturn(book);
         Mockito.when(idService.newId()).thenReturn("test-id");
 
         BookService bookService = new BookService(booksRepo, idService);
+
 
         // WHEN
         Book actual = bookService.addBook(bookDto);
