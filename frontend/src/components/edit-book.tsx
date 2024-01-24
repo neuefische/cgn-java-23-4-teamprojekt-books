@@ -1,6 +1,6 @@
 import {Book} from "../types/Book.ts";
 import React, {ChangeEvent, FormEvent, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 type EditBookProps = {
     books: Book[],
@@ -24,12 +24,16 @@ export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
         setAuthor(event.target.value)
     }
 
+    const navigate = useNavigate();
+
     const onSubmitEdit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
         editBook({
             id: book?.id || "",
             title, author
         })
+
+        navigate(`/books/${book?.id}`)
     }
 
     return (
@@ -46,10 +50,8 @@ export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
                         <input name="author" value={author} type="text" onChange={onAuthorChange}
                                placeholder="Author..."/>
                     </div>
-                    <Link to={`/books/${book?.id}`}>
 
-                        <button type="submit">Edit book</button>
-                    </Link>
+                    <button type="submit">Edit book</button>
                 </form>
             </div>
         </div>
