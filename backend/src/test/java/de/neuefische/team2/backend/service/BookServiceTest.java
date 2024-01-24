@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BookServiceTest {
@@ -13,7 +14,7 @@ public class BookServiceTest {
     BooksRepo booksRepo = Mockito.mock(BooksRepo.class);
 
     @Test
-    public void getBooksTest_returnListOfAllBook(){
+    public void getBooksTest_returnListOfAllBook() {
         //GIVEN
         Mockito.when(booksRepo.findAll()).thenReturn(List.of(
                 new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling"),
@@ -36,7 +37,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent(){
+    public void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() {
         //GIVEN
         Book udpatedBook = new Book("1", "Harry Potter und der Stein der Weisen", "JayKay Rowlings");
         Mockito.when(booksRepo.save(Mockito.any())).thenReturn(udpatedBook);
