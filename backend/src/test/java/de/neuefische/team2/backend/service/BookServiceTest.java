@@ -35,4 +35,23 @@ public class BookServiceTest {
         Mockito.verifyNoMoreInteractions(booksRepo);
     }
 
+    @Test
+    public void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent(){
+        //GIVEN
+        Book udpatedBook = new Book("1", "Harry Potter und der Stein der Weisen", "JayKay Rowlings");
+        Mockito.when(booksRepo.save(Mockito.any())).thenReturn(udpatedBook);
+
+        BookService bookService = new BookService(booksRepo);
+
+
+        //WHEN
+        Book actual = bookService.updateBook(udpatedBook);
+
+        //THEN
+        assertEquals(udpatedBook, actual);
+
+        Mockito.verify(booksRepo, Mockito.times(1)).save(udpatedBook);
+        Mockito.verifyNoMoreInteractions(booksRepo);
+    }
+
 }
