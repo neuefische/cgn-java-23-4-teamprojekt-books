@@ -1,4 +1,6 @@
-import {Book} from "../Book.ts";
+import {Book} from "../types/Book.ts";
+import {BookElement} from "./book-element.tsx";
+import React from "react";
 
 type ViewAllBooksProps = {
     books: Book[]
@@ -13,10 +15,8 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = (props: ViewAllBooksPro
 
     return (
         <div className="books">
-            {props.books.map(book => (<div key={book.id} className="book">
-                {book.title}
-                <button className="book-delete-button" onClick={() => handleBookDelete(book.id)}> Delete</button>
-            </div>))}
+            {books.map(book => (<BookElement key={book.id} book={book}/>))}
+            <button className="book-delete-button" onClick={() => handleBookDelete(book.id)}> Delete</button>
         </div>
     );
 
