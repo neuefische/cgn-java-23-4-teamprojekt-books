@@ -2,13 +2,11 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import {ViewAllBooks} from "./components/view-all-books.tsx";
 import {EditBook} from "./components/edit-book.tsx";
-import {ViewBook} from "./components/view-book.tsx";
+import ViewBook from "./components/view-book.tsx";
 import {Book} from "./types/Book.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
-import BookDetailsPage from "./components/BookDetailsPage.tsx";
 
-import {Routes, Route} from "react-router-dom";
 
 
 function App() {
@@ -17,9 +15,7 @@ function App() {
     useEffect(() => {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
-    useEffect(() => {
-        axios.get("/api/books/").then(response => setBooks(response.data))
-    }, [])
+
 
     const editBook = (book: Book): void => {
         axios.put(`/api/books/${book.id}`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
@@ -30,7 +26,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
-                <Route path="/books/:id" element={<ViewBook books={books}/>}/>
+                <Route path="/books/:id" element={<ViewBook/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
             </Routes>
         </>
