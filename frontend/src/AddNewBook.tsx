@@ -17,27 +17,21 @@ export default function AddNewBook(props : AddNewBookProps){
     }
 
     function onAuthorChange(event: ChangeEvent<HTMLInputElement>) {
-
             setAuthor(event.target.value)
     }
 
     const onBookSubmit = (event: FormEvent<HTMLFormElement>) => {
-
         event.preventDefault()
-
         const bookToSave: Book = {
             id : 1,
             title: title,
             author: author,
         }
-
-
         props.saveBook(bookToSave)
 
         setTitle("")
         setAuthor("")
     }
-
 
           return(
               <div>
