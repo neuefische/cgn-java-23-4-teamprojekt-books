@@ -3,10 +3,11 @@ import React, {ChangeEvent, FormEvent, useState} from "react";
 import {useParams} from "react-router-dom";
 
 type EditBookProps = {
-    books: Book[]
+    books: Book[],
+    editBook: (book: Book) => void
 }
 
-export const EditBook: React.FC<EditBookProps> = ({books}) => {
+export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
 
     const {id} = useParams();
 
@@ -23,17 +24,18 @@ export const EditBook: React.FC<EditBookProps> = ({books}) => {
         setAuthor(event.target.value)
     }
 
-    const editBook = (event: FormEvent<HTMLFormElement>): void => {
+    const onSubmitEdit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
-        console.log("submit")
-        console.log(title)
-        console.log(author)
+        editBook({
+            id: book?.id || "",
+            title, author
+        })
     }
 
     return (
         <div className="book-detail">
             <div className="book">
-                <form onSubmit={editBook}>
+                <form onSubmit={onSubmitEdit}>
                     <div>
 
                         <div>Title</div>

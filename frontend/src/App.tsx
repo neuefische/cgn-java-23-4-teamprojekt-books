@@ -15,11 +15,16 @@ function App() {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
 
+    const editBook = (book: Book): void => {
+        axios.put(`/api/books/${book.id}`).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
+        )
+    }
+
     return (
         <>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
-                <Route path="/books/:id/edit" element={<EditBook books={books}/>}/>
+                <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
             </Routes>
         </>
     )
