@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class BookService {
@@ -16,5 +17,7 @@ public class BookService {
     }
     public List<Book> getBooks(){
         return booksRepo.findAll();
+    }
+    public Book getById(String id){return booksRepo.findById(id).orElseThrow(()-> new NoSuchElementException("No book with such id!"));
     }
 }
