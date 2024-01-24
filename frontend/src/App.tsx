@@ -33,7 +33,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
-                <Route path="/books/:id" element={<ViewBook/>}/>
+                <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
             </Routes>
         </>

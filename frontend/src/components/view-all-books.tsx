@@ -4,19 +4,13 @@ import React from "react";
 
 type ViewAllBooksProps = {
     books: Book[]
-    handleBookDelete: (id: string) => void
 }
 
-export const ViewAllBooks: React.FC<ViewAllBooksProps> = (props: ViewAllBooksProps) => {
-
-    const handleBookDelete = (id: string) => {
-        props.handleBookDelete(id)
-    }
+export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({books}) => {
 
     return (
         <div className="books">
             {books.map(book => (<BookElement key={book.id} book={book}/>))}
-            <button className="book-delete-button" onClick={() => handleBookDelete(book.id)}> Delete</button>
         </div>
     );
 
