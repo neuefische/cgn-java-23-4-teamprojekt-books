@@ -2,10 +2,13 @@ package de.neuefische.team2.backend.service;
 
 import de.neuefische.team2.backend.models.Book;
 import de.neuefische.team2.backend.repos.BooksRepo;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,4 +58,18 @@ public class BookServiceTest {
         Mockito.verifyNoMoreInteractions(booksRepo);
     }
 
+    @Test
+    public void getBookByIdTest_returnBookWithId() {
+        //GIVEN
+        String expectedId = "1";
+        Mockito.when(booksRepo.findById(expectedId)).thenReturn(Optional.of(
+                new Book("1", "Title", "Author")
+        ));
+        BookService bookService = new BookService(booksRepo);
+        //WHEN
+        Book foundBook = bookService.getById(expectedId);
+        //THEN
+        Assertions.assertNotNull(foundBook);
+        Assertions.assertEquals(expectedId, foundBook.id());
+    }
 }
