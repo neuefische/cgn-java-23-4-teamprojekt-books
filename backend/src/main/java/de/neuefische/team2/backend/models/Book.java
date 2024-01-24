@@ -1,5 +1,6 @@
 package de.neuefische.team2.backend.models;
 
+import lombok.With;
 import org.springframework.data.annotation.Id;
 
 public record Book(
@@ -7,6 +8,6 @@ public record Book(
         String id,
         String title,
         String author
-) {
+                    ) {
 
 }

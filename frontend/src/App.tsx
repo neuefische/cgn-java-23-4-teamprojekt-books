@@ -7,14 +7,20 @@ import {Book} from "./types/Book.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 
+import AddNewBook from "./AddNewBook.tsx";
 
 
 function App() {
+
     const [books, setBooks] = useState<Book[]>([])
 
     useEffect(() => {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
+
+const addBook =(bookToSave:Book)=>{
+    setBooks([...books, bookToSave ])
+}
 
   const deleteBook = (id: string) => {
     axios.delete(`/api/books/${id}`)
@@ -35,6 +41,7 @@ function App() {
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
                 <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
+                <Route path={"/books/add"} element={<AddNewBook saveBook={addBook}/>}/>
             </Routes>
         </>
     )

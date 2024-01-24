@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -137,6 +136,34 @@ public class BookControllerIntegrationTest {
                 .andReturn();
 
         assertEquals(mvcResult.getResponse().getStatus(), 200);
+    }
+
+    @Test
+    void addBookTest_shouldReturnOneObject_whenObjectWasSavedInRepository() throws Exception {
+
+        // GIVEN
+        // WHEN
+        mvc.perform(MockMvcRequestBuilders.post("/api/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                         {
+                           "title": "Harry Potter und der Stein der Weisen",
+                           "author": "J.K. Rowling"
+                         }
+                        """)
+        )
+        // THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+
+                  {
+                     "title": "Harry Potter und der Stein der Weisen",
+                      "author": "J.K. Rowling"
+                  }
+                """))
+
+                .andExpect(jsonPath("$.id").isNotEmpty());
+
     }
 
 }
