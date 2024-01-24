@@ -8,8 +8,10 @@ public record Book(
         String id,
         String title,
         String author
-/*        String genre,
-        String publication_date*/
+
+/*      String genre,
+        String publication_date
+*/
 
        ) {
 
