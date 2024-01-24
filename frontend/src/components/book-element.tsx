@@ -12,7 +12,7 @@ export const BookElement: React.FC<BookElementProps> = ({book}) => {
     return (
         <div className="book">
             <div>{book.title}</div>
-            <Link to={`/books/${book.id}`}>
+            <Link to={`/books/${book.id}/edit`}>
                 <button>Edit</button>
             </Link>
         </div>
