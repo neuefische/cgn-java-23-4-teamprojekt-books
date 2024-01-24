@@ -3,6 +3,8 @@ import './App.css'
 import {ViewAllBooks} from "./components/view-all-books.tsx";
 import {Book} from "./Book.ts";
 import axios from "axios";
+import {Route, Routes} from "react-router-dom";
+import BookDetailsPage from "./components/BookDetailsPage.tsx";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([])
@@ -13,7 +15,10 @@ function App() {
 
   return (
     <>
-      <ViewAllBooks books={books} />
+        <Routes>
+      <Route path={"/"} element={<ViewAllBooks books={books} />}/>
+      <Route path={"/:id"} element={<BookDetailsPage books={books}/>}/>
+            </Routes>
     </>
   )
 }
