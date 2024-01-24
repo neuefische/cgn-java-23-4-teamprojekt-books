@@ -2,10 +2,7 @@ package de.neuefische.team2.backend.controller;
 
 import de.neuefische.team2.backend.models.Book;
 import de.neuefische.team2.backend.service.BookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -23,7 +20,7 @@ public class BooksController {
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(Book book) {
+    public Book updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
 }
