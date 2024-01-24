@@ -2,11 +2,11 @@ import {Book} from "../types/Book.ts";
 import React from "react";
 import {useParams} from "react-router-dom";
 
-type ViewBookProps = {
+type EditBookProps = {
     books: Book[]
 }
 
-export const ViewBook: React.FC<ViewBookProps> = ({books}) => {
+export const EditBook: React.FC<EditBookProps> = ({books}) => {
 
     const {id} = useParams();
 

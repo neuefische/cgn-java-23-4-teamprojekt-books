@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import {ViewAllBooks} from "./components/view-all-books.tsx";
-import {ViewBook} from "./components/view-book.tsx";
+import {EditBook} from "./components/edit-book.tsx";
 import {Book} from "./types/Book.ts";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
-                <Route path="/books/:id/edit" element={<ViewBook books={books}/>}/>
+                <Route path="/books/:id/edit" element={<EditBook books={books}/>}/>
             </Routes>
         </>
     )
