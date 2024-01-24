@@ -12,6 +12,9 @@ function App() {
   useEffect(() => {
     axios.get("/api/books").then(response => setBooks(response.data))
   }, [])
+    useEffect(() => {
+        axios.get("/api/books/").then(response => setBooks(response.data))
+    }, [])
 
   return (
     <>
