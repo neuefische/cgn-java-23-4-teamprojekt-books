@@ -50,7 +50,7 @@ export default function AddNewBook(props: Readonly<AddNewBookProps>) {
             isbn: isbn,
             genre: genre,
             publicationDate: publicationDate,
-            imageURL: imageUrl
+            imageUrl: imageUrl
         }
 
         props.saveBook(bookToSave)

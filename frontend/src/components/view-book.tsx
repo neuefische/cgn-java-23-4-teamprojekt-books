@@ -7,18 +7,18 @@ type ViewBookProps = {
     handleBookDelete: (id: string) => void
 }
 
-export default function ViewBook(props: ViewBookProps){
-const [book, setBooks] = useState<Book>();
+export default function ViewBook(props: ViewBookProps) {
+    const [book, setBooks] = useState<Book>();
     const {id} = useParams();
-   useEffect(() => {
+    useEffect(() => {
         axios.get(`/api/books/${id}`).then(response => setBooks(response.data))
 
-    }, [])
+    }, [id])
 
     const handleBookDelete = (id: string | undefined) => {
-       if(id) {
-           props.handleBookDelete(id)
-       }
+        if (id) {
+            props.handleBookDelete(id)
+        }
     }
 
     return (
