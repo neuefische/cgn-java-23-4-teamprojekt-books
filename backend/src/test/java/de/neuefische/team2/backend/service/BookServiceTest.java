@@ -3,7 +3,6 @@ package de.neuefische.team2.backend.service;
 import de.neuefische.team2.backend.models.Book;
 import de.neuefische.team2.backend.models.BookDto;
 import de.neuefische.team2.backend.repos.BooksRepo;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

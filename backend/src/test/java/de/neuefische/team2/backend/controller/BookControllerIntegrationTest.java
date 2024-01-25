@@ -124,15 +124,13 @@ class BookControllerIntegrationTest {
     @Test
     void getBookByNoExistingIdTest_shouldReturnNoObject() throws Exception {
         //GIVEN
-        Book book = booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www"));
         String nonExistingId = "nonExistingId";
         //WHEN
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books/{id}", nonExistingId))
                 //THEN
                 .andExpect(status().isNotFound())
                 .andReturn();
-        Assertions.assertEquals(mvcResult.getResponse().getStatus(), 404);
+        Assertions.assertEquals(404, mvcResult.getResponse().getStatus());
 
     }
     @DirtiesContext
