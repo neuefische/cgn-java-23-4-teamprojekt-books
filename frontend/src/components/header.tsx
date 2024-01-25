@@ -123,16 +123,19 @@ export default function Header() {
                 </div>
             </StickyHeader>
             <div
-                className={`nav-mobile ${isMenuClicked || "hidden"}`}
+                className={`nav-mobile ${isMenuClicked ? "" : "hidden"}`}
             >
                 <ul>
                     {menuItems.map((item, index) => (
-                        <li
-                            key={item.name + index * 123}
-                            className="item"
-                        >
-                            <Link to={item.href}>{item.name}</Link>
-                        </li>
+                        <Link key={item.name + index * 123} to={item.href}
+                              onClick={() => setIsMenuClicked(!isMenuClicked)}>
+                            <li
+
+                                className="item"
+                            >
+                                {item.name}
+                            </li>
+                        </Link>
                     ))}
                 </ul>
             </div>
