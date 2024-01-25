@@ -1,7 +1,7 @@
 package de.neuefische.team2.backend.service;
 
 import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.models.BookDto;
+import de.neuefische.team2.backend.models.BookCreate;
 import de.neuefische.team2.backend.repos.BooksRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -105,7 +105,7 @@ class BookServiceTest {
     @Test
     void addBookTest_returnBook(){
         // GIVEN
-        BookDto bookDto = new BookDto("Harry Potter und der Stein der Weisen", "J.K. Rowling",
+        BookCreate bookCreate = new BookCreate("Harry Potter und der Stein der Weisen", "J.K. Rowling",
                 "123", "Fantasy", "someday", "www");
         Book book = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
                 "123", "Fantasy", "someday", "www");
@@ -115,7 +115,7 @@ class BookServiceTest {
         BookService bookService = new BookService(booksRepo, idService);
 
         // WHEN
-        Book actual = bookService.addBook(bookDto);
+        Book actual = bookService.addBook(bookCreate);
 
         // THEN
         Mockito.verify(booksRepo).save(book);

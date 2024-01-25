@@ -1,6 +1,6 @@
 package de.neuefische.team2.backend.models;
 
-public record BookDto(
+public record BookCreate(
         String title,
         String author,
         String isbn,

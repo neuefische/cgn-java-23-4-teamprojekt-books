@@ -1,4 +1,4 @@
-import {Book} from "./types/Book.ts";
+import {Book} from "../types/Book.ts";
 
 import {ChangeEvent, FormEvent, useState} from "react";
 
