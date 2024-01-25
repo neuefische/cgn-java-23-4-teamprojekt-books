@@ -8,30 +8,32 @@ type EditBookProps = {
 }
 
 export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
-
+    const navigate = useNavigate();
     const {id} = useParams();
 
-    const book: Book | undefined = books.find(book => book.id === id);
+    const [book, setBook] = useState<Book | undefined>(books.find(book => book.id === id))
 
-    const [title, setTitle] = useState<string>(book?.title || "")
-    const [author, setAuthor] = useState<string>(book?.author || "")
-
-    const onTitleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        setTitle(event.target.value)
+    if (!book) {
+        navigate("/404")
+        return;
     }
 
-    const onAuthorChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        setAuthor(event.target.value)
+    const keyToNameMap = {
+        title: "Title",
+        author: "Author",
+        isbn: "ISBN",
+        genre: "Genre",
+        publicationDate: "Publication Date",
+        imageUrl: "Cover Image (URL)",
     }
 
-    const navigate = useNavigate();
+    const onBookChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        setBook({...book, [event.target.name]: event.target.value})
+    }
 
     const onSubmitEdit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
-        editBook({
-            id: book?.id || "",
-            title, author
-        })
+        editBook(book)
 
         navigate(`/books/${book?.id}`)
     }
@@ -40,17 +42,13 @@ export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
         <div className="book-detail">
             <div className="book">
                 <form onSubmit={onSubmitEdit}>
-                    <div>
-
-                        <div>Title</div>
-                        <input name="title" value={title} type="text" onChange={onTitleChange} placeholder="Title..."/>
-                    </div>
-                    <div>
-                        <div>Author</div>
-                        <input name="author" value={author} type="text" onChange={onAuthorChange}
-                               placeholder="Author..."/>
-                    </div>
-
+                    {Object.keys(book).map(key => (
+                        <div key={key}>
+                            <div>{keyToNameMap[key as keyof typeof keyToNameMap]}</div>
+                            <input name={key} value={book[key as keyof Book]} type="text" onChange={onBookChange}
+                                   placeholder={`${keyToNameMap[key as keyof typeof keyToNameMap]}...`}/>
+                        </div>
+                    ))}
                     <button type="submit">Edit book</button>
                 </form>
             </div>
