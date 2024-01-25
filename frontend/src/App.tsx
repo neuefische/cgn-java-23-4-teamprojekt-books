@@ -8,6 +8,7 @@ import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 
 import AddNewBook from "./AddNewBook.tsx";
+import Header from "./components/header.tsx";
 
 
 function App() {
@@ -38,8 +39,10 @@ function App() {
 
     return (
         <>
+            <Header/>
             <Routes>
-                <Route path="/" element={<ViewAllBooks books={books}/>}/>
+                <Route path="/" element={<h1>Welcome to our book library</h1>}/>
+                <Route path="/books" element={<ViewAllBooks books={books}/>}/>
                 <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
                 <Route path={"/books/add"} element={<AddNewBook saveBook={addBook}/>}/>
