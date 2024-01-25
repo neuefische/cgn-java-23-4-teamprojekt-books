@@ -1,7 +1,7 @@
 package de.neuefische.team2.backend.service;
 
 import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.models.BookDto;
+import de.neuefische.team2.backend.models.BookCreate;
 import de.neuefische.team2.backend.repos.BooksRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class BookService {
-
     private final BooksRepo booksRepo;
     private final IdService idService;
 
@@ -36,10 +35,10 @@ public class BookService {
         return bookToDelete;
     }
 
-    public Book addBook(BookDto bookDto){
+    public Book addBook(BookCreate bookCreate){
 
         String id = idService.newId();
-        Book book = new Book(id, bookDto.title(), bookDto.author());
+        Book book = new Book(id, bookCreate.title(), bookCreate.author(), bookCreate.isbn(), bookCreate.genre(), bookCreate.publicationDate(), bookCreate.imageURL());
         return booksRepo.save(book);
     }
 

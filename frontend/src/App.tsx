@@ -7,7 +7,7 @@ import {Book} from "./types/Book.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 
-import AddNewBook from "./AddNewBook.tsx";
+import AddNewBook from "./components/add-new-book.tsx";
 import Header from "./components/header.tsx";
 
 
@@ -19,18 +19,18 @@ function App() {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
 
-    const addBook =(bookToSave : Book)=>{
-         setBooks([...books, bookToSave ])
-         axios.post("/api/books", bookToSave).then(response => console.log(response.data))
+    const addBook = (bookToSave: Book) => {
+        setBooks([...books, bookToSave])
+        axios.post("/api/books", bookToSave).then(response => response.data)
     }
 
-  const deleteBook = (id: string) => {
-    axios.delete(`/api/books/${id}`)
-        .then(response => {
-          setBooks([...books.filter(book => id !== book.id)]);
-          return console.log(response.data)
-        })
-  }
+    const deleteBook = (id: string) => {
+        axios.delete(`/api/books/${id}`)
+            .then(response => {
+                setBooks([...books.filter(book => id !== book.id)]);
+                return response.data
+            })
+    }
 
     const editBook = (book: Book): void => {
         axios.put(`/api/books/${book.id}`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
