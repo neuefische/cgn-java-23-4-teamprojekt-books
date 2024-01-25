@@ -33,7 +33,7 @@ function App() {
     }
 
     const editBook = (book: Book): void => {
-        axios.put(`/api/books/${book.id}`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
+        axios.put(`/api/books`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
         )
     }
 
