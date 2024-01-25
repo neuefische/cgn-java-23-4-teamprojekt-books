@@ -17,10 +17,10 @@ export const HamburgerTwo: React.FC<HamburgerTwoProps> = ({
             >
                 <div className="bars">
                     <div
-                        className={`bar top ${isActive && "active"}`}
+                        className={`bar top ${isActive ? "active" : ""}`}
                     ></div>
                     <div
-                        className={`bar bottom ${isActive && "active"}`}
+                        className={`bar bottom ${isActive ? "active" : ""}`}
                     ></div>
                 </div>
             </button>

@@ -7,6 +7,7 @@ import {Book} from "./types/Book.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 
+import Header from "./components/header.tsx";
 
 
 function App() {
@@ -16,13 +17,13 @@ function App() {
         axios.get("/api/books").then(response => setBooks(response.data))
     }, [])
 
-  const deleteBook = (id: string) => {
-    axios.delete(`/api/books/${id}`)
-        .then(response => {
-          setBooks([...books.filter(book => id !== book.id)]);
-          return console.log(response.data)
-        })
-  }
+    const deleteBook = (id: string) => {
+        axios.delete(`/api/books/${id}`)
+            .then(response => {
+                setBooks([...books.filter(book => id !== book.id)]);
+                return console.log(response.data)
+            })
+    }
 
     const editBook = (book: Book): void => {
         axios.put(`/api/books/${book.id}`, book).then(response => setBooks(books.map((item) => (item.id === book.id ? response.data : book)))
@@ -31,7 +32,7 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header/>
             <Routes>
                 <Route path="/" element={<ViewAllBooks books={books}/>}/>
                 <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>

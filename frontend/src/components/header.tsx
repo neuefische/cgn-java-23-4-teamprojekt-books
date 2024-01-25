@@ -1,5 +1,6 @@
 "use client";
 
+import {Link} from "react-router-dom";
 import {StickyHeader} from "./sticky-header";
 import {HamburgerTwo} from "./hamburger-two";
 
@@ -8,9 +9,7 @@ import {MouseEvent, useEffect, useState} from "react";
 export default function Header() {
     const menuItems: { name: string; href: string }[] = [
         {name: "Home", href: "/"},
-        {name: "Packing lists", href: "/packing"},
-        {name: "Reviews", href: "/reviews"},
-        {name: "Blog", href: "/blog"},
+        {name: "Books", href: "/books"},
     ];
 
     const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
@@ -60,7 +59,7 @@ export default function Header() {
         });
     };
 
-    const onMenuMouseLeave = (event: MouseEvent<HTMLDivElement>): void => {
+    const onMenuMouseLeave = (): void => {
         setMenuButtonHoverState({
             left: 0,
             height: 0,
@@ -85,9 +84,9 @@ export default function Header() {
         <>
             <StickyHeader isFixed={isMenuClicked}>
                 <div className="header-content">
-                    <Link href={"/"} className="logo">
-                        <img src="/favicon.ico" alt="logo" className="icon"/>
-                        <span className="name">ProsePal</span>
+                    <Link to={"/"} className="logo">
+                        <img src="/books_icon.png" alt="logo" className="icon"/>
+                        <span className="name">Nerdify</span>
                     </Link>
                     <div
                         className="links"
@@ -106,7 +105,7 @@ export default function Header() {
                             }}
                         />
                         {menuItems.map((item, index) => (
-                            <Link key={item.name + index} href={item.href}>
+                            <Link key={item.name + index} to={item.href}>
                                 <button
                                     onMouseEnter={onButtonMouseEnter}
                                 >
@@ -132,7 +131,7 @@ export default function Header() {
                             key={item.name + index * 123}
                             className="item"
                         >
-                            <Link href={item.href}>{item.name}</Link>
+                            <Link to={item.href}>{item.name}</Link>
                         </li>
                     ))}
                 </ul>

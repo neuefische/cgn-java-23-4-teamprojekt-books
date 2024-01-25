@@ -29,7 +29,7 @@ export const StickyHeader: React.FC<StickyHeaderProps> = ({
     return (
         <div
             ref={header}
-            className={`sticky-header ${top > 0 && "scrolled"} ${isFixed ? "fixed" : "sticky"}`}
+            className={`sticky-header ${top > 0 ? "scrolled" : ""} ${isFixed ? "fixed" : "sticky"}`}
         >
             {children}
         </div>
