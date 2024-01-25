@@ -12,9 +12,9 @@ export const BookCard: React.FC<BookCardProps> = ({book}) => {
     return (
         <Link to={`/books/${book.id}`}>
 
-        <div className="book">
-            <div>{book.title}</div>
-        </div>
+            <div className="book">
+                <div>{book.title}</div>
+            </div>
         </Link>
     );
 
