@@ -7,6 +7,5 @@ public record BookCreate(
         String genre,
         String publicationDate,
         String imageUrl
-        )
-{
+) {
 }

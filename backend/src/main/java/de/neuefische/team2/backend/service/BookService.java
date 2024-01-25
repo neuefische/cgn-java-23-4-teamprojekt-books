@@ -6,6 +6,7 @@ import de.neuefische.team2.backend.repos.BooksRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 
@@ -16,7 +17,7 @@ public class BookService {
 
     public BookService(BooksRepo booksRepo, IdService idService) {
         this.booksRepo = booksRepo;
-        this.idService= idService;
+        this.idService = idService;
     }
 
     public List<Book> getBooks() {
@@ -26,7 +27,9 @@ public class BookService {
     public Book updateBook(Book book) {
         return booksRepo.save(book);
     }
-    public Book getById(String id){return booksRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "No book with such id!"));
+
+    public Book getById(String id) {
+        return booksRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No book with such id!"));
     }
 
     public Book deleteBookById(String id) {
@@ -35,7 +38,7 @@ public class BookService {
         return bookToDelete;
     }
 
-    public Book addBook(BookCreate bookCreate){
+    public Book addBook(BookCreate bookCreate) {
 
         String id = idService.newId();
         Book book = new Book(id, bookCreate.title(), bookCreate.author(), bookCreate.isbn(), bookCreate.genre(), bookCreate.publicationDate(), bookCreate.imageUrl());

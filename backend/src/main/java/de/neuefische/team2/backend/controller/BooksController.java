@@ -3,10 +3,8 @@ package de.neuefische.team2.backend.controller;
 import de.neuefische.team2.backend.models.Book;
 import de.neuefische.team2.backend.models.BookCreate;
 import de.neuefische.team2.backend.service.BookService;
-import org.springframework.web.bind.annotation.*;
-
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
