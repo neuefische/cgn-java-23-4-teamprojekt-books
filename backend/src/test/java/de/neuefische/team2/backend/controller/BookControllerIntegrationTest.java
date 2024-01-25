@@ -47,7 +47,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageURL": "www"
+                             "imageUrl": "www"
                          }]
                         """))
                 .andReturn();
@@ -73,7 +73,7 @@ class BookControllerIntegrationTest {
                                     "isbn": "123",
                                     "genre": "Fantasy",
                                     "publicationDate": "someday",
-                                    "imageURL": "www"
+                                    "imageUrl": "www"
                                }
                                      
                                 """))
@@ -88,7 +88,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageURL": "www"
+                             "imageUrl": "www"
                          }
                         """))
                 .andReturn();
@@ -114,7 +114,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageURL": "www"
+                             "imageUrl": "www"
                         }
                         """))
                 .andReturn();
@@ -153,7 +153,7 @@ class BookControllerIntegrationTest {
                                     "isbn": "123",
                                     "genre": "Fantasy",
                                     "publicationDate": "someday",
-                                    "imageURL": "www"
+                                    "imageUrl": "www"
                                  }
                                 """))
                 .andReturn();
@@ -175,7 +175,7 @@ class BookControllerIntegrationTest {
                             "isbn": "123",
                             "genre": "Fantasy",
                             "publicationDate": "someday",
-                            "imageURL": "www"
+                            "imageUrl": "www"
                          }
                         """)
         )
@@ -189,7 +189,7 @@ class BookControllerIntegrationTest {
                         "isbn": "123",
                         "genre": "Fantasy",
                         "publicationDate": "someday",
-                        "imageURL": "www"
+                        "imageUrl": "www"
                   }
                 """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
