@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class BookService {
-
     private final BooksRepo booksRepo;
     private final IdService idService;
 
@@ -39,7 +38,7 @@ public class BookService {
     public Book addBook(BookDto bookDto){
 
         String id = idService.newId();
-        Book book = new Book(id, bookDto.title(), bookDto.author());
+        Book book = new Book(id, bookDto.title(), bookDto.author(), bookDto.isbn(), bookDto.genre(), bookDto.publicationDate(), bookDto.imageURL());
         return booksRepo.save(book);
     }
 
