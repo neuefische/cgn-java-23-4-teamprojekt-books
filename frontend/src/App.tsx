@@ -9,6 +9,7 @@ import {Route, Routes} from "react-router-dom";
 
 import AddNewBook from "./components/add-new-book.tsx";
 import Header from "./components/header.tsx";
+import NotFound from "./components/not-found.tsx";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
                 <Route path={"/books/add"} element={<AddNewBook saveBook={addBook}/>}/>
+                <Route path={"/*"} element={<NotFound/>}/>
             </Routes>
         </>
     )
