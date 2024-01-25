@@ -3,11 +3,11 @@ import React from "react";
 
 import {Link} from "react-router-dom";
 
-type BookElementProps = {
+type BookCardProps = {
     book: Book
 }
 
-export const BookElement: React.FC<BookElementProps> = ({book}) => {
+export const BookCard: React.FC<BookCardProps> = ({book}) => {
 
     return (
         <Link to={`/books/${book.id}`}>
