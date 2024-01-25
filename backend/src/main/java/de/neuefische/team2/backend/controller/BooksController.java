@@ -28,10 +28,12 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable String id){return bookService.getById(id);}
+    public Book getBookById(@PathVariable String id) {
+        return bookService.getById(id);
+    }
 
     @DeleteMapping("/{id}")
-    public  Book deleteBookById(@PathVariable String id) {
+    public Book deleteBookById(@PathVariable String id) {
         return bookService.deleteBookById(id);
     }
 
