@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@mui/joy/Button';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
-import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import {FormEvent, useState} from "react";
 import {Book} from "../types/Book.ts";
@@ -48,46 +47,45 @@ export default function BasicModal(props: Readonly<AddNewBookProps>) {
                 Add new Book
             </Button>
             <Modal
+                className="flex flex-col justify-center items-center"
                 aria-labelledby="modal-title"
                 aria-describedby="modal-desc"
                 open={open}
                 onClose={() => setOpen(false)}
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-                <Sheet
-                    variant="outlined"
-                    sx={{
-                        maxWidth: 500,
-                        borderRadius: 'md',
-                        p: 3,
-                        boxShadow: 'lg',
-                    }}
-                >
-                    <ModalClose variant="plain" sx={{ m: 1 }} />
-                    <Typography
-                        component="h2"
-                        id="add-new-book"
-                        level="h4"
-                        textColor="inherit"
-                        fontWeight="lg"
-                        mb={1}
-                    >
+                <Sheet className="rounded-md p-7">
+                    <ModalClose variant="plain"/>
+                    <h2 className="flex justify-center mb-5 font-bold text-lg">
                         Insert book information
-                    </Typography>
-                    <form onSubmit={onBookSubmit}>
-                        <br/> Title <input value={title} onChange={event => setTitle(event.target.value)}
+                    </h2>
+                    <form className="flex flex-col gap-3" onSubmit={onBookSubmit}>
+                        <div className="flex justify-between">
+                            Title <input value={title} onChange={event => setTitle(event.target.value)}
                                            placeholder=""/>
-                        <br/> Author <input value={author} onChange={event => setAuthor(event.target.value)}
+                        </div>
+                        <div className="flex justify-between">
+                            Author <input value={author} onChange={event => setAuthor(event.target.value)}
                                             placeholder=""/>
-                        <br/> ISBN <input value={isbn} onChange={event => setIsbn(event.target.value)} placeholder=""/>
-                        <br/> Genre <input value={genre} onChange={event => setGenre(event.target.value)}
-                                           placeholder=""/>
-                        <br/> Publication Date <input value={publicationDate}
-                                                      onChange={event => setPublicationDate(event.target.value)}
-                                                      placeholder=""/>
-                        <br/> Image URL <input value={imageUrl} onChange={event => setImageUrl(event.target.value)}
-                                               placeholder=""/>
-                        <button type="submit">Save</button>
+                        </div>
+                        <div className="flex justify-between">
+                            ISBN <input value={isbn} onChange={event => setIsbn(event.target.value)}
+                                              placeholder=""/>
+                        </div>
+                        <div className="flex justify-between">
+                            Genre <input value={genre} onChange={event => setGenre(event.target.value)}
+                                                   placeholder=""/>
+                        </div>
+                        <div className="flex justify-between gap-3">
+                            Publication Date <input value={publicationDate}
+                                                              onChange={event => setPublicationDate(event.target.value)}
+                                                              placeholder=""/>
+                        </div>
+                        <div className="flex justify-between">
+                            Image URL <input value={imageUrl}
+                                                       onChange={event => setImageUrl(event.target.value)}
+                                                       placeholder=""/>
+                        </div>
+                                <button type="submit">Save</button>
                     </form>
                 </Sheet>
             </Modal>
