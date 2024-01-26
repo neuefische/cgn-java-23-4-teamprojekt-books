@@ -1,7 +1,7 @@
 import {Book} from "../types/Book.ts";
 import {BookCard} from "./book-card.tsx";
 import React from "react";
-import BasicModal from "./add-new-book-modal.tsx";
+import AddNewBookModal from "./add-new-book-modal.tsx";
 
 type ViewAllBooksProps = {
     books: Book[]
@@ -17,7 +17,7 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({books, saveBook}) => 
     return (
         <div className="books">
             {books.map(book => (<BookCard key={book.id} book={book}/>))}
-            <BasicModal saveBook={saveBooks}/>
+            <AddNewBookModal saveBook={saveBooks}/>
         </div>
     );
 

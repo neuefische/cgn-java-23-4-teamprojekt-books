@@ -10,8 +10,8 @@ type AddNewBookProps = {
     saveBook: (bookToSave: Book) => void
 }
 
-export default function BasicModal(props: Readonly<AddNewBookProps>) {
-    const [open, setOpen] = React.useState<boolean>(false);
+export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
+    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
     const [title, setTitle] = useState<string>("")
     const [author, setAuthor] = useState<string>("")
     const [isbn, setIsbn] = useState<string>("")
@@ -43,15 +43,15 @@ export default function BasicModal(props: Readonly<AddNewBookProps>) {
 
     return (
         <React.Fragment>
-            <Button variant="outlined" color="neutral" onClick={() => setOpen(true)}>
+            <Button variant="outlined" color="neutral" onClick={() => setIsModalOpen(true)}>
                 Add new Book
             </Button>
             <Modal
                 className="flex flex-col justify-center items-center"
                 aria-labelledby="modal-title"
                 aria-describedby="modal-desc"
-                open={open}
-                onClose={() => setOpen(false)}
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
             >
                 <Sheet className="rounded-md p-7">
                     <ModalClose variant="plain"/>
