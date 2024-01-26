@@ -16,9 +16,9 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const toggleIsFavourite = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     setIsFavourite(!isFavourite);
-    axios
-      .put("/api/books", { ...book, isFavourite: !isFavourite })
-      .then((response) => console.log(response));
+    axios.put("/api/books", { ...book, isFavourite: !isFavourite }).then(() => {
+      return;
+    });
   };
 
   return (
