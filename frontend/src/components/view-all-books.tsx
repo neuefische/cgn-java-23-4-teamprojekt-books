@@ -16,7 +16,7 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({
     return saveBook(bookToSave);
   };
   return (
-    <div className="flex flex-col items-center p-10">
+    <div className="flex flex-col items-center p-16">
       <div className="flex flex-wrap justify-center gap-16">
         {books.map((book) => (
           <BookCard key={book.id} book={book} />
