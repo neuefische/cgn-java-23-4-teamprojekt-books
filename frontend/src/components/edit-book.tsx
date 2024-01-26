@@ -42,11 +42,11 @@ export const EditBook: React.FC<EditBookProps> = ({books, editBook}) => {
         <div className="book-detail">
             <div className="book">
                 <form onSubmit={onSubmitEdit}>
-                    {Object.keys(book).map(key => (
+                    {(Object.keys(book) as [keyof typeof keyToNameMap]).map(key => (
                         <div key={key}>
-                            <div>{keyToNameMap[key as keyof typeof keyToNameMap]}</div>
-                            <input name={key} value={book[key as keyof Book]} type="text" onChange={onBookChange}
-                                   placeholder={`${keyToNameMap[key as keyof typeof keyToNameMap]}...`}/>
+                            <div>{keyToNameMap[key]}</div>
+                            <input name={key} value={book[key]} type="text" onChange={onBookChange}
+                                   placeholder={`${keyToNameMap[key]}...`}/>
                         </div>
                     ))}
                     <button type="submit">Edit book</button>
