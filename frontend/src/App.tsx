@@ -6,8 +6,6 @@ import ViewBook from "./components/view-book.tsx";
 import {Book} from "./types/Book.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
-
-import AddNewBook from "./components/add-new-book.tsx";
 import Header from "./components/header.tsx";
 import NotFound from "./components/not-found.tsx";
 
@@ -43,10 +41,9 @@ function App() {
             <Header/>
             <Routes>
                 <Route path="/" element={<h1>Welcome to our book library</h1>}/>
-                <Route path="/books" element={<ViewAllBooks books={books}/>}/>
+                <Route path="/books" element={<ViewAllBooks books={books} saveBook={addBook}/>}/>
                 <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook}/>}/>
                 <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook}/>}/>
-                <Route path={"/books/add"} element={<AddNewBook saveBook={addBook}/>}/>
                 <Route path={"/*"} element={<NotFound/>}/>
             </Routes>
         </>
