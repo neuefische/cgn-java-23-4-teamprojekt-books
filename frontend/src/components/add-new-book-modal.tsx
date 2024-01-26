@@ -7,7 +7,7 @@ import {FormEvent, useState} from "react";
 import {Book} from "../types/Book.ts";
 
 type AddNewBookProps = {
-    saveBook: (bookToSave: Book) => void
+    saveBook: (bookToSave: Book) => void,
 }
 
 export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
