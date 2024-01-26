@@ -1,9 +1,10 @@
 import { Book } from "../types/Book.ts";
-import React, {MouseEvent, useState} from "react";
+import React, { MouseEvent, useState } from "react";
 
 import { FavouriteIcon } from "./FavouriteIcon.tsx";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 type BookCardProps = {
   book: Book;
@@ -14,8 +15,11 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
 
   const toggleIsFavourite = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    setIsFavourite(!isFavourite)
-  }
+    setIsFavourite(!isFavourite);
+    axios
+      .put("/api/books", { ...book, isFavourite: !isFavourite })
+      .then((response) => console.log(response));
+  };
 
   return (
     <div className="relative">
@@ -24,7 +28,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
           <img
             src={book.imageUrl}
             alt={book.title}
-            className="h-3/5 object-contain select-none"
+            className="h-3/5 select-none object-contain"
           />
           <div className="flex flex-col items-center gap-0">
             <div className="text-center text-lg font-black">{book.title}</div>
@@ -33,7 +37,10 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
           </div>
         </div>
       </Link>
-      <div className="absolute right-3 top-3 cursor-pointer" onClick={toggleIsFavourite}>
+      <div
+        className="absolute right-3 top-3 cursor-pointer"
+        onClick={toggleIsFavourite}
+      >
         <FavouriteIcon isActive={isFavourite} />
       </div>
     </div>
