@@ -24,7 +24,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
     <div className="relative">
       <Link to={`/books/${book.id}`}>
-        <div className="m-1 flex h-72 w-72 flex-col justify-between rounded-md border-border bg-white p-5 shadow-card">
+        <div className="m-1 flex h-72 w-72 flex-col justify-between rounded-md bg-border/20 bg-white p-5">
           <img
             src={book.imageUrl}
             alt={book.title}
