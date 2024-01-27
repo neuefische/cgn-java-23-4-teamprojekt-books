@@ -13,8 +13,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(a -> a
+        http.authorizeHttpRequests(a -> a
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))

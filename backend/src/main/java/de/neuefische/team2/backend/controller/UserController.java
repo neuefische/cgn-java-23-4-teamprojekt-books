@@ -16,11 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public User getCurrentUser(@AuthenticationPrincipal OAuth2User principal) {
-        if(principal == null) {
-            return null;
-        }
-
+    public User getLoggedInUser(@AuthenticationPrincipal OAuth2User principal) {
         return userService.getUser(principal);
     }
 }

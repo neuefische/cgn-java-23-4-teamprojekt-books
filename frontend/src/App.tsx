@@ -6,14 +6,21 @@ import ViewBook from "./components/view-book.tsx";
 import { Book } from "./types/Book.ts";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/header.tsx";
+import { Header } from "./components/header.tsx";
+import Home from "./components/home.tsx";
 import NotFound from "./components/not-found.tsx";
+import Login from "./components/login.tsx";
+import { User } from "./types/User.ts";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
+  const [user, setUser] = useState<User>(null);
 
   useEffect(() => {
     axios.get("/api/books").then((response) => setBooks(response.data));
+    axios.get("/api/user").then((response) => {
+      setUser(response.data);
+    });
   }, []);
 
   const addBook = (bookToSave: Book) => {
@@ -36,12 +43,13 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={!!user} />
       <Routes>
-        <Route path="/" element={<h1>Welcome to our book library</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/books" element={<ViewAllBooks books={books} saveBook={addBook} />} />
         <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
         <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
+        <Route path="/login" element={<Login />} />
         <Route path={"/*"} element={<NotFound />} />
       </Routes>
     </>
