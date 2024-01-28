@@ -9,9 +9,10 @@ import React, { MouseEvent, useEffect, useState } from "react";
 
 type HeaderProps = {
   isLoggedIn: boolean;
+  logout: () => void;
 };
 
-export const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
+export const Header: React.FC<HeaderProps> = ({ isLoggedIn, logout }) => {
   const menuItems: { name: string; href: string }[] = [
     { name: "Home", href: "/" },
     { name: "Books", href: "/books" },
@@ -118,14 +119,14 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
               ))}
             </div>
           </div>
-          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} />
+          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} logout={logout} />
           <div className="flex justify-self-end lg:hidden">
             <HamburgerTwo onHamburgerClick={toggleMenu} isActive={isMenuClicked} />
           </div>
         </div>
       </StickyHeader>
       <div className={`nav-mobile ${isMenuClicked ? "" : "hidden"}`}>
-        <UserMenu className="flex flex-col" isLoggedIn={isLoggedIn} />
+        <UserMenu className="flex flex-col" isLoggedIn={isLoggedIn} logout={logout} />
         <ul>
           {menuItems.map((item, index) => (
             <Link key={item.name + index * 123} to={item.href} onClick={() => setIsMenuClicked(!isMenuClicked)}>

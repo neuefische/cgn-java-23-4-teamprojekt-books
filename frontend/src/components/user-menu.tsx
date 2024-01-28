@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 type UserMenuProps = {
   isLoggedIn: boolean;
   className: string;
+  logout: () => void;
 };
 
-export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className }) => {
+export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logout }) => {
   return isLoggedIn ? (
     <div className={className}>
-      <button className={`h-8 rounded-lg px-3 text-sm`}>Log Out</button>
+      <button onClick={logout} className={`h-8 rounded-lg px-3 text-sm`}>
+        Log Out
+      </button>
     </div>
   ) : (
     <div className={`${className} gap-2 text-sm`}>

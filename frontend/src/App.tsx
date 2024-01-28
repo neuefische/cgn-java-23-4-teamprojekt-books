@@ -41,9 +41,11 @@ function App() {
       .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : book))));
   };
 
+  const logout = () => axios.get("/api/user/logout").then(() => setUser(null));
+
   return (
     <>
-      <Header isLoggedIn={!!user} />
+      <Header isLoggedIn={!!user} logout={logout}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<ViewAllBooks books={books} saveBook={addBook} />} />
