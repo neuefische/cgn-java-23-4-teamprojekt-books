@@ -5,20 +5,21 @@ import { FavouriteIcon } from "./FavouriteIcon.tsx";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { User } from "../types/User.ts";
 
 type BookCardProps = {
   book: Book;
+  user: User;
 };
 
-export const BookCard: React.FC<BookCardProps> = ({ book }) => {
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+export const BookCard: React.FC<BookCardProps> = ({ user, book }) => {
+  const [isFavourite, setIsFavourite] = useState<boolean>(user.favouriteBooks.includes(book.id));
 
-  const toggleIsFavourite = (event: MouseEvent<HTMLDivElement>) => {
+  const toggleIsFavourite = async (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     setIsFavourite(!isFavourite);
-    axios.put("/api/books", { ...book, isFavourite: !isFavourite }).then(() => {
-      return;
-    });
+    await axios.put("/api/books", { ...book, isFavourite: !isFavourite });
+    await axios.put("/api/user", { ...user, favouriteBooks: [...user.favouriteBooks, book.id] });
   };
 
   return (

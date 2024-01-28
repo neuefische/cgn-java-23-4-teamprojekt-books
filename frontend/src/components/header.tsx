@@ -13,10 +13,13 @@ type HeaderProps = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ isLoggedIn, logout }) => {
-  const menuItems: { name: string; href: string }[] = [
-    { name: "Home", href: "/" },
-    { name: "Books", href: "/books" },
-  ];
+  const menuItems: { name: string; href: string }[] = [{ name: "Home", href: "/" }];
+
+  const loggedInMenuItems: { name: string; href: string }[] = [{ name: "Books", href: "/books" }];
+
+  if (isLoggedIn) {
+    menuItems.push(...loggedInMenuItems);
+  }
 
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
 

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -22,9 +24,13 @@ public class UserService {
         boolean isReturningUser = usersRepo.existsUserByGithubId(githubId);
 
         if (!isReturningUser) {
-            usersRepo.save(new User(idService.newId(), githubId, name));
+            return usersRepo.save(new User(idService.newId(), githubId, name, new ArrayList<>(), new ArrayList<>()));
         }
 
         return usersRepo.findUserByGithubId(user.getAttribute("id"));
+    }
+
+    public User updateUser(User user) {
+        return usersRepo.save(user);
     }
 }
