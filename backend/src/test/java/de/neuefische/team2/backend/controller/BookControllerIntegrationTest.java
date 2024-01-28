@@ -90,7 +90,8 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageUrl": "www"
+                             "imageUrl": "www",
+                             "isFavourite": false
                          }
                         """))
                 .andReturn();
