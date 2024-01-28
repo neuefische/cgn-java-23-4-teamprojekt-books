@@ -2,6 +2,7 @@ package de.neuefische.team2.backend.controller;
 
 import de.neuefische.team2.backend.models.User;
 import de.neuefische.team2.backend.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -18,5 +19,10 @@ public class UserController {
     @GetMapping
     public User getLoggedInUser(@AuthenticationPrincipal OAuth2User principal) {
         return userService.getUser(principal);
+    }
+
+    @GetMapping("/logout")
+    void logout(HttpSession session) {
+        session.invalidate();
     }
 }
