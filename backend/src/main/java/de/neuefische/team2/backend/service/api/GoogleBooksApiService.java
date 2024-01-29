@@ -27,7 +27,7 @@ public class GoogleBooksApiService {
                 .body(GoogleBooksResponse.class);
 
         assert response != null;
-        //ToDo filter instead of getFirst()
+        // filter instead of getFirst()
         return response.items().getFirst().volumeInfo();
     }
 }
