@@ -66,19 +66,19 @@ class BookControllerIntegrationTest {
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                                                    
-                                   {
-                                        "id":"1",
-                                        "title":"Harry Potter und der Stein der Weisen",
-                                        "author":"JayKay Rowling",
-                                        "isbn": "123",
-                                        "genre": "Fantasy",
-                                        "publicationDate": "someday",
-                                        "imageUrl": "www",
-                                        "isFavourite": false
-                                   }
-                                         
-                                    """))
+                                                                 
+                                {
+                                     "id":"1",
+                                     "title":"Harry Potter und der Stein der Weisen",
+                                     "author":"JayKay Rowling",
+                                     "isbn": "123",
+                                     "genre": "Fantasy",
+                                     "publicationDate": "someday",
+                                     "imageUrl": "www",
+                                     "isFavourite": false
+                                }
+                                      
+                                 """))
 
                 //THEN
                 .andExpect(MockMvcResultMatchers.status().isOk())
