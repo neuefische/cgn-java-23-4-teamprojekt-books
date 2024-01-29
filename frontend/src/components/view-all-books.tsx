@@ -22,10 +22,6 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({ user, books, saveBoo
     return <div>loading</div>;
   }
 
-  const saveBooks = (bookToSave: Book) => {
-    return saveBook(bookToSave);
-  };
-
   const setFavourite = (id: string): void => {
     const updatedFavourites: string[] = [...favourites, id];
     updateUser({ ...user, favouriteBooks: updatedFavourites });
@@ -52,7 +48,7 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({ user, books, saveBoo
         ))}
       </div>
       <div className="mt-10">
-        <AddNewBookModal saveBook={saveBooks} />
+        <AddNewBookModal saveBook={saveBook} />
       </div>
     </div>
   );
