@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -83,5 +84,20 @@ class UserServiceTest {
         verify(usersRepo, times(1)).existsUserByGithubId(id);
         verify(usersRepo, times(1)).findUserByGithubId(id);
         verifyNoMoreInteractions(idService, usersRepo);
+    }
+
+    @Test
+    void updateUserShouldSaveUserToDatabaseAndReturnUser() {
+        // Given
+        User user = new User("123", 123423, "Paul", new ArrayList<>(), new ArrayList<>());
+        when(usersRepo.save(any(User.class))).thenReturn(user);
+
+        // When
+        User result = userService.updateUser(user);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(user, result);
+        verify(usersRepo, times(1)).save(user);
     }
 }
