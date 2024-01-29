@@ -1,6 +1,7 @@
 package de.neuefische.team2.backend.service.api;
 
 import de.neuefische.team2.backend.models.api.GoogleBooksResponse;
+import de.neuefische.team2.backend.models.api.VolumeInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -19,7 +20,7 @@ public class GoogleBooksApiService {
                 .build();
     }
 
-    public String getBookDescription(String isbn, String title){
+    public VolumeInfo getBookDescription(String isbn, String title){
         GoogleBooksResponse response = restClient.get()
                 .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
                 .retrieve()
@@ -27,6 +28,6 @@ public class GoogleBooksApiService {
 
         assert response != null;
         //ToDo filter instead of getFirst()
-        return response.items().getFirst().volumeInfo().description();
+        return response.items().getFirst().volumeInfo();
     }
 }
