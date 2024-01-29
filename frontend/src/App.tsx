@@ -5,15 +5,24 @@ import { EditBook } from "./components/edit-book.tsx";
 import ViewBook from "./components/view-book.tsx";
 import { Book } from "./types/Book.ts";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/header.tsx";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { Header } from "./components/header.tsx";
+import Home from "./components/home.tsx";
 import NotFound from "./components/not-found.tsx";
+import Login from "./components/login.tsx";
+import { User } from "./types/User.ts";
 
 function App() {
+  const navigate = useNavigate();
+
   const [books, setBooks] = useState<Book[]>([]);
+  const [user, setUser] = useState<User>(null);
 
   useEffect(() => {
     axios.get("/api/books").then((response) => setBooks(response.data));
+    axios.get("/api/user").then((response) => {
+      setUser(response.data);
+    });
   }, []);
 
   const addBook = (bookToSave: Book) => {
@@ -34,14 +43,21 @@ function App() {
       .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : book))));
   };
 
+  const logout = () =>
+    axios.get("/api/user/logout").then(() => {
+      setUser(null);
+      navigate("/");
+    });
+
   return (
     <>
-      <Header />
+      <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
-        <Route path="/" element={<h1>Welcome to our book library</h1>} />
-        <Route path="/books" element={<ViewAllBooks books={books} saveBook={addBook} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} />} />
         <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
         <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
+        <Route path="/login" element={<Login />} />
         <Route path={"/*"} element={<NotFound />} />
       </Routes>
     </>
