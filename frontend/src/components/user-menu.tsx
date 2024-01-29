@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { cn } from "../lib/utils.ts";
 
 type UserMenuProps = {
   isLoggedIn: boolean;
@@ -15,7 +16,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logou
       </button>
     </div>
   ) : (
-    <div className={`${className} gap-2 text-sm`}>
+    <div className={cn("gap-2 text-sm", className)}>
       <Link to="/login">
         <button className="h-8 rounded-lg px-3">Log In</button>
       </Link>
