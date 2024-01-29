@@ -43,7 +43,7 @@ public class BookService {
 
         String id = idService.newId();
 
-        Book book = new Book(id, bookCreate);
+        Book book = bookCreate.withId(id);
         return booksRepo.save(book);
     }
 

@@ -14,8 +14,4 @@ public record Book(
         String publicationDate,
         String imageUrl
 ) {
-
-    public Book(String id, BookCreate bookCreate) {
-        this(id, bookCreate.title(), bookCreate.author(), bookCreate.isbn(), bookCreate.genre(), bookCreate.publicationDate(), bookCreate.imageUrl());
-    }
 }

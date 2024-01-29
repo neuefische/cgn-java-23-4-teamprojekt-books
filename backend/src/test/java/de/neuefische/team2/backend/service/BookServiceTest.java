@@ -109,7 +109,7 @@ class BookServiceTest {
         // GIVEN
         BookCreate bookCreate = new BookCreate("Harry Potter und der Stein der Weisen", "J.K. Rowling",
                 "123", "Fantasy", "someday", "www");
-        Book book = new Book("1", bookCreate);
+        Book book = bookCreate.withId("1");
 
         Mockito.when(booksRepo.save(Mockito.any())).thenReturn(book);
         Mockito.when(idService.newId()).thenReturn("1");

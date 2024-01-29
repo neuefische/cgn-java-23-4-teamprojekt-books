@@ -8,4 +8,8 @@ public record BookCreate(
         String publicationDate,
         String imageUrl
 ) {
+
+    public Book withId(String id) {
+        return new Book(id, title(), author(), isbn(), genre(), publicationDate(), imageUrl());
+    }
 }
