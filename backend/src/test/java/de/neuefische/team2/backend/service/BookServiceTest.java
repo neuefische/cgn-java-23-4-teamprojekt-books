@@ -23,9 +23,9 @@ class BookServiceTest {
         //GIVEN
         Mockito.when(booksRepo.findAll()).thenReturn(List.of(
                 new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                        "123", "Fantasy", "someday", "www"),
+                        "123", "Fantasy", "someday", "www", false),
                 new Book("2", "Harry Potter und die Kammer des Schreckens", "J.K. Rowling",
-                        "456", "Fantasy", "someotherday", "www2")));
+                        "456", "Fantasy", "someotherday", "www2", false)));
 
         BookService bookService = new BookService(booksRepo, idService);
 
@@ -35,9 +35,9 @@ class BookServiceTest {
         //THEN
         assertEquals(List.of(
                 new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                        "123", "Fantasy", "someday", "www"),
+                        "123", "Fantasy", "someday", "www", false),
                 new Book("2", "Harry Potter und die Kammer des Schreckens", "J.K. Rowling",
-                        "456", "Fantasy", "someotherday", "www2")
+                        "456", "Fantasy", "someotherday", "www2", false)
         ), actual);
 
         Mockito.verify(booksRepo, Mockito.times(1)).findAll();
@@ -48,7 +48,7 @@ class BookServiceTest {
      void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() {
         //GIVEN
         Book udpatedBook = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www");
+                "123", "Fantasy", "someday", "www", false);
         Mockito.when(booksRepo.save(Mockito.any())).thenReturn(udpatedBook);
 
         BookService bookService = new BookService(booksRepo, idService);
@@ -70,7 +70,7 @@ class BookServiceTest {
         String expectedId = "1";
         Mockito.when(booksRepo.findById(expectedId)).thenReturn(Optional.of(
                 new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                        "123", "Fantasy", "someday", "www")));
+                        "123", "Fantasy", "someday", "www", false)));
         BookService bookService = new BookService(booksRepo, idService);
 
         //WHEN
@@ -86,7 +86,7 @@ class BookServiceTest {
         //GIVEN
         Mockito.when(booksRepo.findById(Mockito.any())).thenReturn(
                 Optional.of(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                        "123", "Fantasy", "someday", "www")));
+                        "123", "Fantasy", "someday", "www", false)));
 
         BookService toDoService = new BookService(booksRepo, idService);
 
@@ -95,7 +95,7 @@ class BookServiceTest {
 
         //THEN
         assertEquals(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www"), actual);
+                "123", "Fantasy", "someday", "www", false), actual);
 
         Mockito.verify(booksRepo, Mockito.times(1)).findById(Mockito.any());
         Mockito.verify(booksRepo, Mockito.times(1)).delete(Mockito.any());
@@ -106,9 +106,9 @@ class BookServiceTest {
     void addBookTest_returnBook(){
         // GIVEN
         BookCreate bookCreate = new BookCreate("Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www");
+                "123", "Fantasy", "someday", "www", false);
         Book book = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www");
+                "123", "Fantasy", "someday", "www", false);
 
         Mockito.when(booksRepo.save(Mockito.any())).thenReturn(book);
         Mockito.when(idService.newId()).thenReturn("1");
@@ -122,7 +122,7 @@ class BookServiceTest {
         Mockito.verify(idService).newId();
 
         Book expected = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www");
+                "123", "Fantasy", "someday", "www", false);
         assertEquals(expected, actual);
     }
 

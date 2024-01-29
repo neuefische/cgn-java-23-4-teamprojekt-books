@@ -6,6 +6,7 @@ public record BookCreate(
         String isbn,
         String genre,
         String publicationDate,
-        String imageUrl
+        String imageUrl,
+        boolean isFavourite
 ) {
 }

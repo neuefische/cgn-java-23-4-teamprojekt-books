@@ -5,6 +5,7 @@ import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
 import { Book } from "../types/Book.ts";
+import { v4 as uuid } from "uuid";
 
 type AddNewBookProps = {
   saveBook: (bookToSave: Book) => void;
@@ -23,7 +24,7 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
     event.preventDefault();
 
     const bookToSave: Book = {
-      id: "1",
+      id: uuid(),
       title: title,
       author: author,
       isbn: isbn,
