@@ -12,11 +12,10 @@ public record Book(
         String isbn,
         String genre,
         String publicationDate,
-        String imageUrl,
-        boolean isFavourite
+        String imageUrl
 ) {
 
     public Book(String id, BookCreate bookCreate) {
-        this(id, bookCreate.title(), bookCreate.author(), bookCreate.isbn(), bookCreate.genre(), bookCreate.publicationDate(), bookCreate.imageUrl(), bookCreate.isFavourite());
+        this(id, bookCreate.title(), bookCreate.author(), bookCreate.isbn(), bookCreate.genre(), bookCreate.publicationDate(), bookCreate.imageUrl());
     }
 }
