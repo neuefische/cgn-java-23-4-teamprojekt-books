@@ -31,10 +31,6 @@ public class GoogleBooksApiControllerIntegrationTest {
 
     private static MockWebServer mockWebServer;
 
-    static {
-        System.setProperty("GOOGLE_BOOKS_API_KEY", "someKey");
-    }
-
     @BeforeAll
     public static void setup() throws IOException {
         mockWebServer = new MockWebServer();

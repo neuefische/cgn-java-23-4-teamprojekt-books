@@ -1,4 +1,4 @@
-package de.neuefische.team2.backend.models.api;
+package de.neuefische.team2.backend.models.googlebooksapi;
 
 import java.util.List;
 

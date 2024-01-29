@@ -1,7 +1,7 @@
-package de.neuefische.team2.backend.service.api;
+package de.neuefische.team2.backend.service.googlebooksapi;
 
-import de.neuefische.team2.backend.models.api.GoogleBooksResponse;
-import de.neuefische.team2.backend.models.api.VolumeInfo;
+import de.neuefische.team2.backend.models.googlebooksapi.GoogleBooksResponse;
+import de.neuefische.team2.backend.models.googlebooksapi.VolumeInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -20,7 +20,7 @@ public class GoogleBooksApiService {
                 .build();
     }
 
-    public VolumeInfo getBookDescription(String isbn, String title){
+    public VolumeInfo getBookBlurb(String isbn, String title){
         GoogleBooksResponse response = restClient.get()
                 .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
                 .retrieve()

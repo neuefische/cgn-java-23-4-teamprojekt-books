@@ -1,7 +1,7 @@
-package de.neuefische.team2.backend.controller;
+package de.neuefische.team2.backend.controller.googlebooksapi;
 
-import de.neuefische.team2.backend.models.api.VolumeInfo;
-import de.neuefische.team2.backend.service.api.GoogleBooksApiService;
+import de.neuefische.team2.backend.models.googlebooksapi.VolumeInfo;
+import de.neuefische.team2.backend.service.googlebooksapi.GoogleBooksApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ public class GoogleBooksApiController {
 
     @GetMapping("/{isbn}")
     public VolumeInfo getBookDescriptionByIsbn(@PathVariable String isbn, @RequestParam String title){
-        return googleBooksApiService.getBookDescription(isbn, title);
+        return googleBooksApiService.getBookBlurb(isbn, title);
     }
 
 }
