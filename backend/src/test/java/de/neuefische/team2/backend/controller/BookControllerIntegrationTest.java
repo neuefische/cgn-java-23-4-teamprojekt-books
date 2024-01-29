@@ -1,7 +1,7 @@
 package de.neuefische.team2.backend.controller;
 
-import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.repos.BooksRepo;
+import de.neuefische.team2.backend.models.books.Book;
+import de.neuefische.team2.backend.repos.books.BooksRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

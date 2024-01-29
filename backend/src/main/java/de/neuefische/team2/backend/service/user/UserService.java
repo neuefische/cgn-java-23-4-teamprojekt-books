@@ -1,7 +1,8 @@
-package de.neuefische.team2.backend.service;
+package de.neuefische.team2.backend.service.user;
 
-import de.neuefische.team2.backend.models.User;
-import de.neuefische.team2.backend.repos.UsersRepo;
+import de.neuefische.team2.backend.models.user.User;
+import de.neuefische.team2.backend.repos.user.UsersRepo;
+import de.neuefische.team2.backend.service.IdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
