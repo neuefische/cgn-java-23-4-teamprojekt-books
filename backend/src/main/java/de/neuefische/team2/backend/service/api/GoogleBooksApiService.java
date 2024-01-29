@@ -1,9 +1,7 @@
 package de.neuefische.team2.backend.service.api;
 
 import de.neuefische.team2.backend.models.api.GoogleBooksResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -28,8 +26,7 @@ public class GoogleBooksApiService {
                 .body(GoogleBooksResponse.class);
 
         assert response != null;
-        response.items().getFirst().volumeInfo().description();
-
-        return null;
+        //ToDo filter instead of getFirst()
+        return response.items().getFirst().volumeInfo().description();
     }
 }
