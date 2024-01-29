@@ -5,10 +5,7 @@ type HamburgerTwoProps = {
   isActive: boolean;
 };
 
-export const HamburgerTwo: React.FC<HamburgerTwoProps> = ({
-  onHamburgerClick,
-  isActive,
-}) => {
+export const HamburgerTwo: React.FC<HamburgerTwoProps> = ({ onHamburgerClick, isActive }) => {
   return (
     <div>
       <button onClick={onHamburgerClick} className="hamburger-two">

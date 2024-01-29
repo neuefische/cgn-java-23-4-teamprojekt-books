@@ -44,11 +44,7 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
 
   return (
     <React.Fragment>
-      <Button
-        variant="outlined"
-        color="neutral"
-        onClick={() => setIsModalOpen(true)}
-      >
+      <Button variant="outlined" color="neutral" onClick={() => setIsModalOpen(true)}>
         Add new Book
       </Button>
       <Modal
@@ -60,41 +56,19 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
       >
         <Sheet className="rounded-md p-7">
           <ModalClose variant="plain" />
-          <h2 className="mb-5 flex justify-center text-lg font-bold">
-            Insert book information
-          </h2>
+          <h2 className="mb-5 flex justify-center text-lg font-bold">Insert book information</h2>
           <form className="flex flex-col gap-3" onSubmit={onBookSubmit}>
             <div className="flex justify-between">
-              Title{" "}
-              <input
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-                placeholder=""
-              />
+              Title <input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
-              Author{" "}
-              <input
-                value={author}
-                onChange={(event) => setAuthor(event.target.value)}
-                placeholder=""
-              />
+              Author <input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
-              ISBN{" "}
-              <input
-                value={isbn}
-                onChange={(event) => setIsbn(event.target.value)}
-                placeholder=""
-              />
+              ISBN <input value={isbn} onChange={(event) => setIsbn(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
-              Genre{" "}
-              <input
-                value={genre}
-                onChange={(event) => setGenre(event.target.value)}
-                placeholder=""
-              />
+              Genre <input value={genre} onChange={(event) => setGenre(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between gap-3">
               Publication Date{" "}
@@ -105,12 +79,7 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
               />
             </div>
             <div className="flex justify-between">
-              Image URL{" "}
-              <input
-                value={imageUrl}
-                onChange={(event) => setImageUrl(event.target.value)}
-                placeholder=""
-              />
+              Image URL <input value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} placeholder="" />
             </div>
             <button type="submit">Save</button>
           </form>

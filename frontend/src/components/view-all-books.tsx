@@ -8,10 +8,7 @@ type ViewAllBooksProps = {
   saveBook: (bookToSave: Book) => void;
 };
 
-export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({
-  books,
-  saveBook,
-}) => {
+export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({ books, saveBook }) => {
   const saveBooks = (bookToSave: Book) => {
     return saveBook(bookToSave);
   };

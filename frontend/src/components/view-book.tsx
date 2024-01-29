@@ -27,10 +27,7 @@ export default function ViewBook(props: ViewBookProps) {
         <div>{book?.author}</div>
         <Link to={`/books/${book?.id}/edit`}>
           <button>Edit</button>
-          <button
-            className="book-delete-button"
-            onClick={() => handleBookDelete(book?.id)}
-          >
+          <button className="book-delete-button" onClick={() => handleBookDelete(book?.id)}>
             {" "}
             Delete
           </button>

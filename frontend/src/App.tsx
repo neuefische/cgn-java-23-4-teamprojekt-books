@@ -31,11 +31,7 @@ function App() {
   const editBook = (book: Book): void => {
     axios
       .put(`/api/books`, book)
-      .then((response) =>
-        setBooks(
-          books.map((item) => (item.id === book.id ? response.data : book)),
-        ),
-      );
+      .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : book))));
   };
 
   return (
@@ -43,18 +39,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<h1>Welcome to our book library</h1>} />
-        <Route
-          path="/books"
-          element={<ViewAllBooks books={books} saveBook={addBook} />}
-        />
-        <Route
-          path="/books/:id"
-          element={<ViewBook handleBookDelete={deleteBook} />}
-        />
-        <Route
-          path="/books/:id/edit"
-          element={<EditBook books={books} editBook={editBook} />}
-        />
+        <Route path="/books" element={<ViewAllBooks books={books} saveBook={addBook} />} />
+        <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
+        <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
         <Route path={"/*"} element={<NotFound />} />
       </Routes>
     </>

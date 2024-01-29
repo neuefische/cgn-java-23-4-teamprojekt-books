@@ -38,14 +38,13 @@ export default function Header() {
     duration: number;
     opacity: 1 | 0;
   };
-  const [menuButtonHoverState, setMenuButtonHoverState] =
-    useState<ButtonHoverState>({
-      left: 0,
-      height: 0,
-      width: 0,
-      duration: 0,
-      opacity: 0,
-    });
+  const [menuButtonHoverState, setMenuButtonHoverState] = useState<ButtonHoverState>({
+    left: 0,
+    height: 0,
+    width: 0,
+    duration: 0,
+    opacity: 0,
+  });
 
   const onButtonMouseEnter = (event: MouseEvent<HTMLButtonElement>): void => {
     const target: HTMLButtonElement = event.target as HTMLButtonElement;
@@ -108,21 +107,14 @@ export default function Header() {
             ))}
           </div>
           <div className="hamburger">
-            <HamburgerTwo
-              onHamburgerClick={toggleMenu}
-              isActive={isMenuClicked}
-            />
+            <HamburgerTwo onHamburgerClick={toggleMenu} isActive={isMenuClicked} />
           </div>
         </div>
       </StickyHeader>
       <div className={`nav-mobile ${isMenuClicked ? "" : "hidden"}`}>
         <ul>
           {menuItems.map((item, index) => (
-            <Link
-              key={item.name + index * 123}
-              to={item.href}
-              onClick={() => setIsMenuClicked(!isMenuClicked)}
-            >
+            <Link key={item.name + index * 123} to={item.href} onClick={() => setIsMenuClicked(!isMenuClicked)}>
               <li className="item">{item.name}</li>
             </Link>
           ))}

@@ -5,10 +5,7 @@ type StickyHeaderProps = {
   children: React.ReactNode;
 };
 
-export const StickyHeader: React.FC<StickyHeaderProps> = ({
-  isFixed,
-  children,
-}) => {
+export const StickyHeader: React.FC<StickyHeaderProps> = ({ isFixed, children }) => {
   const [top, setTop] = useState<number>(0);
   const header = useRef<HTMLDivElement>(null);
 
@@ -27,10 +24,7 @@ export const StickyHeader: React.FC<StickyHeaderProps> = ({
   }, []);
 
   return (
-    <div
-      ref={header}
-      className={`sticky-header ${top > 0 ? "scrolled" : ""} ${isFixed ? "fixed" : "sticky"}`}
-    >
+    <div ref={header} className={`sticky-header ${top > 0 ? "scrolled" : ""} ${isFixed ? "fixed" : "sticky"}`}>
       {children}
     </div>
   );
