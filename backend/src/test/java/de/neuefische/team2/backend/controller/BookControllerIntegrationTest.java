@@ -59,10 +59,12 @@ class BookControllerIntegrationTest {
     @Test
     void updateBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
         //GIVEN
-        booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false));
+        Book book = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
+                "123", "Fantasy", "someday", "www", false);
 
         //WHEN
+        booksRepo.save(book);
+
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""

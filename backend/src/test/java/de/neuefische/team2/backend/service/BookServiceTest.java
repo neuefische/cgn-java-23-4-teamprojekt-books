@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BookServiceTest {
 
@@ -45,7 +45,7 @@ class BookServiceTest {
     }
 
     @Test
-     void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() {
+    void updateBookTest_returnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() {
         //GIVEN
         Book udpatedBook = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
                 "123", "Fantasy", "someday", "www", false);
@@ -81,8 +81,9 @@ class BookServiceTest {
         Mockito.verify(booksRepo, Mockito.times(1)).findById(Mockito.any());
         Mockito.verifyNoMoreInteractions(booksRepo);
     }
+
     @Test
-    void deleteToDoTest(){
+    void deleteToDoTest() {
         //GIVEN
         Mockito.when(booksRepo.findById(Mockito.any())).thenReturn(
                 Optional.of(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
@@ -103,12 +104,11 @@ class BookServiceTest {
     }
 
     @Test
-    void addBookTest_returnBook(){
+    void addBookTest_returnBook() {
         // GIVEN
         BookCreate bookCreate = new BookCreate("Harry Potter und der Stein der Weisen", "J.K. Rowling",
                 "123", "Fantasy", "someday", "www", false);
-        Book book = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false);
+        Book book = new Book("1", bookCreate);
 
         Mockito.when(booksRepo.save(Mockito.any())).thenReturn(book);
         Mockito.when(idService.newId()).thenReturn("1");
