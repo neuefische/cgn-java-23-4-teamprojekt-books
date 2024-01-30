@@ -122,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn, logout }) => {
               ))}
             </div>
           </div>
-          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} logout={logout} toggleMenu={toggleMenu} />
+          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} logout={logout}/>
           <div className="flex justify-self-end lg:hidden">
             <HamburgerTwo onHamburgerClick={toggleMenu} isActive={isMenuClicked} />
           </div>

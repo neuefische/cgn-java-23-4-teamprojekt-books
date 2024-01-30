@@ -6,7 +6,7 @@ type UserMenuProps = {
   isLoggedIn: boolean;
   className: string;
   logout: () => void;
-  toggleMenu: () => void;
+  toggleMenu?: () => void;
 };
 
 export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logout, toggleMenu }) => {
