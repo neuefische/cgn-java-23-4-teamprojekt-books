@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>de.neuefische.team2</groupId>
 	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>backend</name>
 	<description>backend</description>
 	<properties>
@@ -96,6 +96,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>app</finalName>
 	</build>
 
 </project>
