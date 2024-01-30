@@ -13,7 +13,7 @@ public class GoogleBooksApiController {
     private final GoogleBooksApiService googleBooksApiService;
 
     @GetMapping("/{isbn}")
-    public VolumeInfo getBookDescriptionByIsbn(@PathVariable String isbn, @RequestParam String title){
+    public VolumeInfo getBookDescriptionByIsbn(@PathVariable String isbn, @RequestParam String title) {
         return googleBooksApiService.getBookBlurb(isbn, title);
     }
 

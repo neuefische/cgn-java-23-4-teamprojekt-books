@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -40,14 +40,14 @@ class UserControllerIntegrationTest {
         mockMvc.perform(put("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(""" 
-                        {
-                            "id": "123",
-                            "githubId": 123,
-                            "name": "Paul",
-                            "books": [],
-                            "favouriteBooks": []
-                        }
-                        """))
+                                {
+                                    "id": "123",
+                                    "githubId": 123,
+                                    "name": "Paul",
+                                    "books": [],
+                                    "favouriteBooks": []
+                                }
+                                """))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value("123"))

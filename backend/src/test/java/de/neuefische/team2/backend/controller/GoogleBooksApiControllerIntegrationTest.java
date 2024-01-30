@@ -26,10 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class GoogleBooksApiControllerIntegrationTest {
 
+    private static MockWebServer mockWebServer;
     @Autowired
     public MockMvc mockMvc;
-
-    private static MockWebServer mockWebServer;
 
     @BeforeAll
     public static void setup() throws IOException {
