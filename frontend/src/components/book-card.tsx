@@ -1,31 +1,26 @@
 import { Book } from "../types/Book.ts";
-import React, { MouseEvent, useState } from "react";
+import React from "react";
 
 import { FavouriteIcon } from "./FavouriteIcon.tsx";
 
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { User } from "../types/User.ts";
 
 type BookCardProps = {
   book: Book;
-  user: User;
+  isFavourite: boolean;
+  removeFavourite: (id: string) => void;
+  setFavourite: (id: string) => void;
 };
 
-export const BookCard: React.FC<BookCardProps> = ({ user, book }) => {
-  const [isFavourite, setIsFavourite] = useState<boolean>(user.favouriteBooks.includes(book.id));
-
-  const toggleIsFavourite = async (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    setIsFavourite(!isFavourite);
-    await axios.put("/api/books", { ...book, isFavourite: !isFavourite });
-    await axios.put("/api/user", { ...user, favouriteBooks: [...user.favouriteBooks, book.id] });
+export const BookCard: React.FC<BookCardProps> = ({ book, isFavourite, removeFavourite, setFavourite }) => {
+  const toggleIsFavourite = (): void => {
+    isFavourite ? removeFavourite(book.id) : setFavourite(book.id);
   };
 
   return (
     <div className="relative">
       <Link to={`/books/${book.id}`}>
-        <div className="m-1 flex h-72 w-72 flex-col justify-between rounded-md bg-border/20 bg-white p-5">
+        <div className="m-1 flex h-72 w-72 flex-col justify-between items-center rounded-md bg-border/10 shadow-card p-5">
           <img src={book.imageUrl} alt={book.title} className="h-3/5 select-none object-contain" />
           <div className="flex flex-col items-center gap-0">
             <div className="text-center text-lg font-black">{book.title}</div>

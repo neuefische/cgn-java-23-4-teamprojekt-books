@@ -20,14 +20,17 @@ function App() {
 
   useEffect(() => {
     axios.get("/api/books").then((response) => setBooks(response.data));
-    axios.get("/api/user").then((response) => {
-      setUser(response.data);
-    });
+    axios.get("/api/user").then((response) => setUser(response.data));
   }, []);
 
+  const updateUser = (updatedUser: User) => {
+    axios.put("/api/user", updatedUser).then((response) => response.data);
+    setUser(updatedUser);
+  };
+
   const addBook = (bookToSave: Book) => {
-    setBooks([...books, bookToSave]);
     axios.post("/api/books", bookToSave).then((response) => response.data);
+    setBooks([...books, bookToSave]);
   };
 
   const deleteBook = (id: string) => {
@@ -54,7 +57,7 @@ function App() {
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} />} />
+        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />} />
         <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
         <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />

@@ -1,8 +1,8 @@
-package de.neuefische.team2.backend.controller;
+package de.neuefische.team2.backend.controller.books;
 
-import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.models.BookCreate;
-import de.neuefische.team2.backend.service.BookService;
+import de.neuefische.team2.backend.models.books.Book;
+import de.neuefische.team2.backend.models.books.BookCreate;
+import de.neuefische.team2.backend.service.books.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

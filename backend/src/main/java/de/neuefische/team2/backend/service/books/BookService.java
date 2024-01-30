@@ -1,8 +1,9 @@
-package de.neuefische.team2.backend.service;
+package de.neuefische.team2.backend.service.books;
 
-import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.models.BookCreate;
-import de.neuefische.team2.backend.repos.BooksRepo;
+import de.neuefische.team2.backend.models.books.Book;
+import de.neuefische.team2.backend.models.books.BookCreate;
+import de.neuefische.team2.backend.repos.books.BooksRepo;
+import de.neuefische.team2.backend.service.IdService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,7 +43,7 @@ public class BookService {
 
         String id = idService.newId();
 
-        Book book = new Book(id, bookCreate);
+        Book book = bookCreate.withId(id);
         return booksRepo.save(book);
     }
 
