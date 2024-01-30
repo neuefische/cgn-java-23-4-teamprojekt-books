@@ -20,7 +20,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book, isFavourite, removeFav
   return (
     <div className="relative">
       <Link to={`/books/${book.id}`}>
-        <div className="m-1 flex h-72 w-72 flex-col justify-between items-center rounded-md bg-border/10 shadow-card p-5">
+        <div className="m-1 flex h-72 w-72 flex-col items-center justify-between rounded-md bg-border/10 p-5 shadow-card">
           <img src={book.imageUrl} alt={book.title} className="h-3/5 select-none object-contain" />
           <div className="flex flex-col items-center gap-0">
             <div className="text-center text-lg font-black">{book.title}</div>
