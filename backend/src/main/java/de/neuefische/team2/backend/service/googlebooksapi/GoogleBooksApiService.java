@@ -1,5 +1,6 @@
 package de.neuefische.team2.backend.service.googlebooksapi;
 
+import de.neuefische.team2.backend.exception.NoSuchBookException;
 import de.neuefische.team2.backend.models.googlebooksapi.GoogleBooksResponse;
 import de.neuefische.team2.backend.models.googlebooksapi.VolumeInfo;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,14 +21,16 @@ public class GoogleBooksApiService {
                 .build();
     }
 
-    public VolumeInfo getBookBlurb(String isbn, String title) {
+    public VolumeInfo getBookBlurb(String isbn, String title) throws NoSuchBookException {
         GoogleBooksResponse response = restClient.get()
                 .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
                 .retrieve()
                 .body(GoogleBooksResponse.class);
 
-        assert response != null;
-        // filter instead of getFirst()
+        if (response == null || response.items() == null) {
+            throw new NoSuchBookException("Could not find any book with ISBN " + isbn);
+        }
         return response.items().getFirst().volumeInfo();
+
     }
 }

@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GoogleBooksApiControllerIntegrationTest {
 
     private static MockWebServer mockWebServer;
+
     @Autowired
     public MockMvc mockMvc;
 
