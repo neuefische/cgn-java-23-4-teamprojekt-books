@@ -20,7 +20,9 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logou
       <Link to="/login">
         <button className="h-8 rounded-lg px-3 w-full">Log In</button>
       </Link>
+      <Link to="/signup">
       <button className="h-8 rounded-lg bg-black px-3 text-white">Sign Up</button>
+      </Link>
     </div>
   );
 };
