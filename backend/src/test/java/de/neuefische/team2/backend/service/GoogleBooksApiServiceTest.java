@@ -40,7 +40,13 @@ public class GoogleBooksApiServiceTest {
                 .thenThrow(new NoSuchBookException("No Book found"));
 
         //WHEN & THEN
-        assertThrows(NoSuchBookException.class, () -> googleBooksApiService.getBookBlurb(notExistingIsbn, notExistingTitle));
+        Exception exception = assertThrows(NoSuchBookException.class, () -> googleBooksApiService.getBookBlurb(notExistingIsbn, notExistingTitle));
+
+        String expectedMessage = "No Book found";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
         Mockito.verify(googleBooksApiService, Mockito.times(1)).getBookBlurb(Mockito.any(), Mockito.any());
         Mockito.verifyNoMoreInteractions(googleBooksApiService);
 
