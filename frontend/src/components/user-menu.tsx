@@ -18,7 +18,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logou
   ) : (
     <div className={cn("gap-2 text-sm", className)}>
       <Link to="/login">
-        <button className="h-8 rounded-lg px-3">Log In</button>
+        <button className="h-8 rounded-lg px-3 w-full">Log In</button>
       </Link>
       <button className="h-8 rounded-lg bg-black px-3 text-white">Sign Up</button>
     </div>
