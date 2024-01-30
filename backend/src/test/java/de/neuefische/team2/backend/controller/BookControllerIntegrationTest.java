@@ -55,6 +55,7 @@ class BookControllerIntegrationTest {
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 
+    @DirtiesContext
     @Test
     void updateBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
         //GIVEN
@@ -98,6 +99,7 @@ class BookControllerIntegrationTest {
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 
+    @DirtiesContext
     @Test
     void getBookByIdTest_shouldReturnObjectWithTheId() throws Exception {
         //GIVEN
@@ -124,6 +126,7 @@ class BookControllerIntegrationTest {
 
     }
 
+    @DirtiesContext
     @Test
     void getBookByNoExistingIdTest_shouldReturnNoObject() throws Exception {
         //GIVEN

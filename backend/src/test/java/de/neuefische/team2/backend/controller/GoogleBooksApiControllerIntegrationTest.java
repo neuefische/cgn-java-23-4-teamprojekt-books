@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,7 +36,6 @@ public class GoogleBooksApiControllerIntegrationTest {
     public static void setup() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-
     }
 
     @DynamicPropertySource
@@ -48,6 +48,7 @@ public class GoogleBooksApiControllerIntegrationTest {
         mockWebServer.shutdown();
     }
 
+    @DirtiesContext
     @Test
     void getBookDescriptionTest_WhenIsbnAndTitle_ThenReturnDescription() throws Exception {
         //Given
