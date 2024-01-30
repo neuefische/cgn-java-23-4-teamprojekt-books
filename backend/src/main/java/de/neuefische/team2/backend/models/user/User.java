@@ -1,4 +1,4 @@
-package de.neuefische.team2.backend.models;
+package de.neuefische.team2.backend.models.user;
 
 import org.springframework.data.annotation.Id;
 

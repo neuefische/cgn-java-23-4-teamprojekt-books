@@ -1,7 +1,7 @@
-package de.neuefische.team2.backend.controller;
+package de.neuefische.team2.backend.controller.user;
 
-import de.neuefische.team2.backend.models.User;
-import de.neuefische.team2.backend.service.UserService;
+import de.neuefische.team2.backend.models.user.User;
+import de.neuefische.team2.backend.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

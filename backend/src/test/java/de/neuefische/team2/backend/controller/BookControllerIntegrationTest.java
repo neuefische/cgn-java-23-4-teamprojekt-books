@@ -1,7 +1,7 @@
 package de.neuefische.team2.backend.controller;
 
-import de.neuefische.team2.backend.models.Book;
-import de.neuefische.team2.backend.repos.BooksRepo;
+import de.neuefische.team2.backend.models.books.Book;
+import de.neuefische.team2.backend.repos.books.BooksRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ class BookControllerIntegrationTest {
     void getBooksTest_shouldReturnListWithOneObject_whenOneObjectWasSavedInRepository() throws Exception {
         //GIVEN
         booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false));
+                "123", "Fantasy", "someday", "www"));
 
         //WHEN
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books"))
@@ -47,8 +47,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageUrl": "www",
-                             "isFavourite": false
+                             "imageUrl": "www"
                          }]
                         """))
                 .andReturn();
@@ -60,7 +59,7 @@ class BookControllerIntegrationTest {
     void updateBooksTest_shouldReturnBookWithUpdatedAuthor_whenBookWithUpdatedAuthorSent() throws Exception {
         //GIVEN
         Book book = new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false);
+                "123", "Fantasy", "someday", "www");
 
         //WHEN
         booksRepo.save(book);
@@ -76,8 +75,7 @@ class BookControllerIntegrationTest {
                                      "isbn": "123",
                                      "genre": "Fantasy",
                                      "publicationDate": "someday",
-                                     "imageUrl": "www",
-                                     "isFavourite": false
+                                     "imageUrl": "www"
                                 }
                                       
                                  """))
@@ -92,8 +90,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageUrl": "www",
-                             "isFavourite": false
+                             "imageUrl": "www"
                          }
                         """))
                 .andReturn();
@@ -105,7 +102,7 @@ class BookControllerIntegrationTest {
     void getBookByIdTest_shouldReturnObjectWithTheId() throws Exception {
         //GIVEN
         Book book = booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false));
+                "123", "Fantasy", "someday", "www"));
         String id = book.id();
         //WHEN
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/books/{id}", id))
@@ -119,8 +116,7 @@ class BookControllerIntegrationTest {
                              "isbn": "123",
                              "genre": "Fantasy",
                              "publicationDate": "someday",
-                             "imageUrl": "www",
-                             "isFavourite": false
+                             "imageUrl": "www"
                         }
                         """))
                 .andReturn();
@@ -146,7 +142,7 @@ class BookControllerIntegrationTest {
     void deleteBook_shouldReturnBook_whenThisObjectWasDeletedFromRepository() throws Exception {
         //GIVEN
         booksRepo.save(new Book("1", "Harry Potter und der Stein der Weisen", "J.K. Rowling",
-                "123", "Fantasy", "someday", "www", false));
+                "123", "Fantasy", "someday", "www"));
 
         //WHEN
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete("/api/books/1"))
@@ -161,8 +157,7 @@ class BookControllerIntegrationTest {
                             "isbn": "123",
                             "genre": "Fantasy",
                             "publicationDate": "someday",
-                            "imageUrl": "www",
-                             "isFavourite": false
+                            "imageUrl": "www"
                          }
                         """))
                 .andReturn();
@@ -184,8 +179,7 @@ class BookControllerIntegrationTest {
                                     "isbn": "123",
                                     "genre": "Fantasy",
                                     "publicationDate": "someday",
-                                    "imageUrl": "www",
-                                    "isFavourite": false
+                                    "imageUrl": "www"
                                  }
                                 """)
                 )
@@ -199,8 +193,7 @@ class BookControllerIntegrationTest {
                                 "isbn": "123",
                                 "genre": "Fantasy",
                                 "publicationDate": "someday",
-                                "imageUrl": "www",
-                                "isFavourite": false
+                                "imageUrl": "www"
                           }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());

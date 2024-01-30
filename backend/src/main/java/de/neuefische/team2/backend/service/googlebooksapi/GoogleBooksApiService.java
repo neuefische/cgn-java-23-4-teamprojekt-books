@@ -20,7 +20,7 @@ public class GoogleBooksApiService {
                 .build();
     }
 
-    public VolumeInfo getBookBlurb(String isbn, String title){
+    public VolumeInfo getBookBlurb(String isbn, String title) {
         GoogleBooksResponse response = restClient.get()
                 .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
                 .retrieve()
