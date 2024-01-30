@@ -122,18 +122,20 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn, logout }) => {
               ))}
             </div>
           </div>
-          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} logout={logout} />
+          <UserMenu className="hidden lg:flex" isLoggedIn={isLoggedIn} logout={logout} toggleMenu={toggleMenu} />
           <div className="flex justify-self-end lg:hidden">
             <HamburgerTwo onHamburgerClick={toggleMenu} isActive={isMenuClicked} />
           </div>
         </div>
       </StickyHeader>
       <div className={`nav-mobile ${isMenuClicked ? "" : "hidden"}`}>
-        <UserMenu className="flex flex-col" isLoggedIn={isLoggedIn} logout={logout} />
+        <UserMenu className="mb-5 flex flex-col" isLoggedIn={isLoggedIn} logout={logout} toggleMenu={toggleMenu} />
         <ul>
           {menuItems.map((item, index) => (
             <Link key={item.name + index * 123} to={item.href} onClick={() => setIsMenuClicked(!isMenuClicked)}>
-              <li className="item">{item.name}</li>
+              <li className="cursor-pointer border-b border-border py-3 leading-6 text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                {item.name}
+              </li>
             </Link>
           ))}
         </ul>
