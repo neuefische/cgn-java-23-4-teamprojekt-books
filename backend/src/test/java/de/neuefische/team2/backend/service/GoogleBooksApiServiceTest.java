@@ -8,11 +8,13 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +28,9 @@ public class GoogleBooksApiServiceTest {
     private static MockWebServer mockWebServer;
 
     private static GoogleBooksApiService googleBooksApiService;
+
+    @Autowired
+    public MockMvc mockMvc;
 
     @BeforeAll
     public static void setup() throws IOException {
@@ -153,7 +158,6 @@ public class GoogleBooksApiServiceTest {
                 actual);
     }
 
-    @DirtiesContext
     @Test
     void getBookDescriptionTest_WhenIsbnAndTitleNotExist_ThenThrowException() {
         //GIVEN
