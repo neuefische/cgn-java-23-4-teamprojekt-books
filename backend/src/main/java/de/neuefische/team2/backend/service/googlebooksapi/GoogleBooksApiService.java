@@ -22,15 +22,15 @@ public class GoogleBooksApiService {
     }
 
     public VolumeInfo getBookBlurb(String isbn, String title) throws NoSuchBookException {
-            GoogleBooksResponse response = restClient.get()
-                    .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
-                    .retrieve()
-                    .body(GoogleBooksResponse.class);
+        GoogleBooksResponse response = restClient.get()
+                .uri("/volumes?q=isbn:" + isbn + "+intitle:" + title + "&langRestrict=en&printType=books&projection=lite")
+                .retrieve()
+                .body(GoogleBooksResponse.class);
 
-            if(response == null || response.items() == null){
-                throw new NoSuchBookException("Could not find any book with ISBN " + isbn);
-            }
-            return response.items().getFirst().volumeInfo();
+        if (response == null || response.items() == null) {
+            throw new NoSuchBookException("Could not find any book with ISBN " + isbn);
+        }
+        return response.items().getFirst().volumeInfo();
 
     }
 }
