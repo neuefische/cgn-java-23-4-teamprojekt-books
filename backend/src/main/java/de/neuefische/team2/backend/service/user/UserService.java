@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +20,12 @@ public class UserService {
             return null;
         }
 
-        Map<String, Object> attributes = user.getAttributes();
+        Integer githubId = user.getAttribute("id");
 
-        int githubId = (int) attributes.get("id");
+        if (githubId == null) {
+            return null;
+        }
+
         String name = user.getAttribute("login");
         boolean isReturningUser = usersRepo.existsUserByGithubId(githubId);
 
