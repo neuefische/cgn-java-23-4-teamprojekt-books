@@ -53,7 +53,7 @@ function App() {
     });
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
