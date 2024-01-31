@@ -43,7 +43,7 @@ function App() {
   const editBook = (book: Book): void => {
     axios
       .put(`/api/books`, book)
-      .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : book))));
+      .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : item))));
   };
 
   const logout = () =>
@@ -53,11 +53,14 @@ function App() {
     });
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />} />
+        <Route
+          path="/books"
+          element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />}
+        />
         <Route path="/books/:id" element={<ViewBook deleteBook={deleteBook} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
