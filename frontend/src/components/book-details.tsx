@@ -9,6 +9,8 @@ type BookDetailsProps = {
   editBook: (book: Book) => void;
 };
 
+const PLACEHOLDER_COVER = "/_44840dd6-d251-4f61-9cf9-33beb6cd95b2.png";
+
 export const BookDetails: React.FC<BookDetailsProps> = ({ deleteBook, editBook }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -36,7 +38,7 @@ export const BookDetails: React.FC<BookDetailsProps> = ({ deleteBook, editBook }
   return (
     <div className="flex flex-1 items-center justify-center">
       <div className="m-1 flex h-max w-96 flex-col items-center justify-between rounded-md bg-border/10 p-16 shadow-card">
-        <img src={book.imageUrl} alt={book.title} className="w-3/5 select-none object-contain" />
+        <img src={book.imageUrl || PLACEHOLDER_COVER} alt={book.title} className="w-3/5 select-none object-contain" />
         <div className="mt-5 flex flex-col items-center gap-0">
           <div className="text-center text-lg font-black">{book.title}</div>
           <div>{book.author}</div>
