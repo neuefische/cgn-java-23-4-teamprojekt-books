@@ -10,6 +10,7 @@ public record Book(
         String isbn,
         String genre,
         String publicationDate,
-        String imageUrl
+        String imageUrl,
+        String blurb
 ) {
 }
