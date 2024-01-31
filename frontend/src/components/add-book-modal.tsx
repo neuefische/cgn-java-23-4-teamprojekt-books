@@ -33,7 +33,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
       genre: genre,
       publicationDate: publicationDate,
       imageUrl: imageUrl,
-      blurb: blurb,
+      blurb: blurb
     };
 
     props.saveBook(bookToSave);
@@ -53,7 +53,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
       axios
         .get(`/api/googleBooks/${isbn}`)
         .then((response) => {
-          setBlurb(response.data);
+          setBlurb(response.data.description);
         })
         .catch(() => console.log("No Result for Google Books Api Request with given ISBN"));
     }
