@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FormEvent, useState} from "react";
+import { FormEvent, useState } from "react";
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
@@ -50,23 +50,21 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
 
   const handleOnBlurIsbn = () => {
     if (isModalOpen) {
-      axios.get(`/api/googleBooks/${isbn}`).then((response) => {
-        setBlurb(response.data);
-      });
+      axios
+        .get(`/api/googleBooks/${isbn}`)
+        .then((response) => {
+          setBlurb(response.data);
+        })
+        .catch(() => console.log("No Result for Google Books Api Request with given ISBN"));
     }
   };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" color="neutral" onClick={() => setIsModalOpen(true)}>
-        Add new Book
-      </Button>
-      <Modal
-        className="flex flex-col items-center justify-center"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-desc"
-        open={isModalOpen}
-        onClose={() => {
+      <Button
+        variant="outlined"
+        color="neutral"
+        onClick={() => {
           setTitle("");
           setAuthor("");
           setIsbn("");
@@ -74,8 +72,17 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
           setPublicationDate("");
           setImageUrl("");
           setBlurb("");
-          setIsModalOpen(false);
+          setIsModalOpen(true);
         }}
+      >
+        Add new Book
+      </Button>
+      <Modal
+        className="flex flex-col items-center justify-center"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       >
         <Sheet className="rounded-md p-7">
           <ModalClose variant="plain" />
