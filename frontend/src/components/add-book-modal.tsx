@@ -8,11 +8,11 @@ import { Book } from "../types/Book.ts";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 
-type AddNewBookProps = {
+type AddBookModalProps = {
   saveBook: (bookToSave: Book) => void;
 };
 
-export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
+export default function AddBookModal(props: Readonly<AddBookModalProps>) {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");

@@ -1,7 +1,7 @@
 import { Book } from "../types/Book.ts";
 import { BookCard } from "./book-card.tsx";
 import React, { useEffect, useState } from "react";
-import AddNewBookModal from "./add-new-book-modal.tsx";
+import AddBookModal from "./add-book-modal.tsx";
 import { User } from "../types/User.ts";
 
 type ViewAllBooksProps = {
@@ -48,7 +48,7 @@ export const ViewAllBooks: React.FC<ViewAllBooksProps> = ({ user, books, saveBoo
         ))}
       </div>
       <div className="mt-10">
-        <AddNewBookModal saveBook={saveBook} />
+        <AddBookModal saveBook={saveBook} />
       </div>
     </div>
   );
