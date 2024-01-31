@@ -6,9 +6,10 @@ type UserMenuProps = {
   isLoggedIn: boolean;
   className: string;
   logout: () => void;
+  toggleMenu?: () => void;
 };
 
-export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logout }) => {
+export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logout, toggleMenu }) => {
   return isLoggedIn ? (
     <div className={className}>
       <button onClick={logout} className={`h-8 rounded-lg px-3 text-sm`}>
@@ -17,10 +18,12 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isLoggedIn, className, logou
     </div>
   ) : (
     <div className={cn("gap-2 text-sm", className)}>
-      <Link to="/login">
-        <button className="h-8 rounded-lg px-3 w-full">Log In</button>
+      <Link onClick={toggleMenu} to="/login">
+        <button className="h-8 w-full rounded-lg px-3">Log In</button>
       </Link>
-      <button className="h-8 rounded-lg bg-black px-3 text-white">Sign Up</button>
+      <Link onClick={toggleMenu} to="/signup">
+        <button className="h-8 w-full rounded-lg bg-black px-3 text-white">Sign Up</button>
+      </Link>
     </div>
   );
 };

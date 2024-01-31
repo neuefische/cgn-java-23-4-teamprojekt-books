@@ -11,6 +11,7 @@ import Home from "./components/home.tsx";
 import NotFound from "./components/not-found.tsx";
 import Login from "./components/login.tsx";
 import { User } from "./types/User.ts";
+import SignUp from "./components/sign-up.tsx";
 
 function App() {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function App() {
     });
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -61,9 +62,10 @@ function App() {
         <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
         <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path={"/*"} element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
