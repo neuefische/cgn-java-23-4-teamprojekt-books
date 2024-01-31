@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ViewAllBooks } from "./components/view-all-books.tsx";
-import { ViewBook } from "./components/view-book.tsx";
+import { BookDetails } from "./components/book-details.tsx";
 import { Book } from "./types/Book.ts";
 import axios from "axios";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -61,7 +61,7 @@ function App() {
           path="/books"
           element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />}
         />
-        <Route path="/books/:id" element={<ViewBook deleteBook={deleteBook} editBook={editBook} />} />
+        <Route path="/books/:id" element={<BookDetails deleteBook={deleteBook} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path={"/*"} element={<NotFound />} />

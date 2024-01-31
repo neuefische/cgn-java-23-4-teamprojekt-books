@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { EditBookModal } from "./edit-book-modal.tsx";
 
-type ViewBookProps = {
+type BookDetailsProps = {
   deleteBook: (id: string) => void;
   editBook: (book: Book) => void;
 };
 
-export const ViewBook: React.FC<ViewBookProps> = ({ deleteBook, editBook }) => {
+export const BookDetails: React.FC<BookDetailsProps> = ({ deleteBook, editBook }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
