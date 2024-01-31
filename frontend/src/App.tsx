@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ViewAllBooks } from "./components/view-all-books.tsx";
-import { EditBook } from "./components/edit-book.tsx";
-import ViewBook from "./components/view-book.tsx";
+import { BookDetails } from "./components/book-details.tsx";
 import { Book } from "./types/Book.ts";
 import axios from "axios";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -44,7 +43,7 @@ function App() {
   const editBook = (book: Book): void => {
     axios
       .put(`/api/books`, book)
-      .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : book))));
+      .then((response) => setBooks(books.map((item) => (item.id === book.id ? response.data : item))));
   };
 
   const logout = () =>
@@ -54,13 +53,15 @@ function App() {
     });
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />} />
-        <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
-        <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
+        <Route
+          path="/books"
+          element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />}
+        />
+        <Route path="/books/:id" element={<BookDetails deleteBook={deleteBook} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path={"/*"} element={<NotFound />} />
