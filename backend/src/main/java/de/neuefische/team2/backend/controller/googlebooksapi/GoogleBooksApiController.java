@@ -15,7 +15,7 @@ public class GoogleBooksApiController {
     private final GoogleBooksApiService googleBooksApiService;
 
     @GetMapping("/{isbn}")
-    public String getBookDescriptionByIsbn(@PathVariable String isbn, @RequestParam Optional<String> title) throws NoSuchBookException {
+    public String getBookBlurbByIsbn(@PathVariable String isbn, @RequestParam Optional<String> title) throws NoSuchBookException {
         return googleBooksApiService.getBookBlurb(isbn, title);
     }
 
