@@ -34,11 +34,15 @@ export const ViewBook: React.FC<ViewBookProps> = ({ deleteBook, editBook }) => {
   };
 
   return (
-    <div className="book-detail">
-      <div className="book">
-        <div>{book.title}</div>
-        <div>{book.author}</div>
-        <div className="flex w-2/3 justify-evenly">
+    <div className="flex flex-1 items-center justify-center">
+      <div className="m-1 flex h-max w-96 flex-col items-center justify-between rounded-md bg-border/10 p-16 shadow-card">
+        <img src={book.imageUrl} alt={book.title} className="w-3/5 select-none object-contain" />
+        <div className="flex flex-col items-center gap-0 mt-5">
+          <div className="text-center text-lg font-black">{book.title}</div>
+          <div>{book.author}</div>
+          <div className="text-sm font-thin">{book.publicationDate}</div>
+        </div>
+        <div className="flex w-2/3 justify-evenly mt-10">
           <EditBookModal book={book} editBook={handleEditBook} />
           <button
             className="h-8 rounded-lg border-none bg-red-500 px-3 text-white"
