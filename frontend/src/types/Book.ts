@@ -6,4 +6,5 @@ export type Book = {
   genre: string;
   publicationDate: string;
   imageUrl: string;
+  blurb: string;
 };

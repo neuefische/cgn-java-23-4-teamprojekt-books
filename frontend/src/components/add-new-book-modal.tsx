@@ -1,11 +1,12 @@
 import * as React from "react";
-import { FormEvent, useState } from "react";
+import {FormEvent, useState} from "react";
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
 import { Book } from "../types/Book.ts";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 type AddNewBookProps = {
   saveBook: (bookToSave: Book) => void;
@@ -19,6 +20,7 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
   const [genre, setGenre] = useState<string>("");
   const [publicationDate, setPublicationDate] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [blurb, setBlurb] = useState<string>("");
 
   const onBookSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,6 +33,7 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
       genre: genre,
       publicationDate: publicationDate,
       imageUrl: imageUrl,
+      blurb: blurb,
     };
 
     props.saveBook(bookToSave);
@@ -40,6 +43,17 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
     setGenre("");
     setPublicationDate("");
     setImageUrl("");
+    setBlurb("");
+
+    setIsModalOpen(false);
+  };
+
+  const handleOnBlurIsbn = () => {
+    if (isModalOpen) {
+      axios.get(`/api/googleBooks/${isbn}`).then((response) => {
+        setBlurb(response.data);
+      });
+    }
   };
 
   return (
@@ -52,20 +66,35 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
         open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setTitle("");
+          setAuthor("");
+          setIsbn("");
+          setGenre("");
+          setPublicationDate("");
+          setImageUrl("");
+          setBlurb("");
+          setIsModalOpen(false);
+        }}
       >
         <Sheet className="rounded-md p-7">
           <ModalClose variant="plain" />
           <h2 className="mb-5 flex justify-center text-lg font-bold">Insert book information</h2>
           <form className="flex flex-col gap-3" onSubmit={onBookSubmit}>
             <div className="flex justify-between">
+              ISBN{" "}
+              <input
+                value={isbn}
+                onChange={(event) => setIsbn(event.target.value)}
+                onBlur={handleOnBlurIsbn}
+                placeholder=""
+              />
+            </div>
+            <div className="flex justify-between">
               Title <input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
               Author <input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder="" />
-            </div>
-            <div className="flex justify-between">
-              ISBN <input value={isbn} onChange={(event) => setIsbn(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
               Genre <input value={genre} onChange={(event) => setGenre(event.target.value)} placeholder="" />
@@ -80,6 +109,16 @@ export default function AddNewBookModal(props: Readonly<AddNewBookProps>) {
             </div>
             <div className="flex justify-between">
               Image URL <input value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} placeholder="" />
+            </div>
+            <div className="flex justify-between">
+              Book Blurb{" "}
+              <textarea
+                value={blurb}
+                onChange={(event) => setBlurb(event.target.value)}
+                rows={5}
+                cols={20}
+                placeholder=""
+              />
             </div>
             <button type="submit">Save</button>
           </form>

@@ -54,11 +54,14 @@ function App() {
     });
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header isLoggedIn={!!user} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />} />
+        <Route
+          path="/books"
+          element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />}
+        />
         <Route path="/books/:id" element={<ViewBook handleBookDelete={deleteBook} />} />
         <Route path="/books/:id/edit" element={<EditBook books={books} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />
