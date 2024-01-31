@@ -1,6 +1,5 @@
 import * as React from "react";
-import {ChangeEvent, FormEvent, useState} from "react";
-import Button from "@mui/joy/Button";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
@@ -14,7 +13,7 @@ type EditBookProps = {
 export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
-  const [localBook, setLocalBook] = useState<Book>(book)
+  const [localBook, setLocalBook] = useState<Book>(book);
 
   const keyToNameMap = {
     title: "Title",
@@ -32,6 +31,7 @@ export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
   const onSubmitEdit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     editBook(localBook);
+    setIsModalOpen(false);
   };
 
   return (
@@ -51,16 +51,16 @@ export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
           <h2 className="mb-5 flex justify-center text-lg font-bold">Insert book information</h2>
           <form className="flex flex-col gap-2" onSubmit={onSubmitEdit}>
             {(Object.keys(keyToNameMap) as [keyof typeof keyToNameMap]).map((key) => (
-                <div key={key} className="flex justify-between">
-                  <div>{keyToNameMap[key]}</div>
-                  <input
-                      name={key}
-                      value={localBook[key]}
-                      type="text"
-                      onChange={onBookChange}
-                      placeholder={`${keyToNameMap[key]}...`}
-                  />
-                </div>
+              <div key={key} className="flex justify-between">
+                <div>{keyToNameMap[key]}</div>
+                <input
+                  name={key}
+                  value={localBook[key]}
+                  type="text"
+                  onChange={onBookChange}
+                  placeholder={`${keyToNameMap[key]}...`}
+                />
+              </div>
             ))}
             <button type="submit">Edit book</button>
           </form>
@@ -68,4 +68,4 @@ export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
       </Modal>
     </React.Fragment>
   );
-}
+};

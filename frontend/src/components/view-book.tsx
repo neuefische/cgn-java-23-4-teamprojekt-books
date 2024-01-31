@@ -28,13 +28,18 @@ export const ViewBook: React.FC<ViewBookProps> = ({ deleteBook, editBook }) => {
     navigate("/books");
   };
 
+  const handleEditBook = (book: Book): void => {
+    editBook(book);
+    setBook(book);
+  };
+
   return (
     <div className="book-detail">
       <div className="book">
         <div>{book.title}</div>
         <div>{book.author}</div>
         <div className="flex w-2/3 justify-evenly">
-          <EditBookModal book={book} editBook={editBook} />
+          <EditBookModal book={book} editBook={handleEditBook} />
           <button
             className="h-8 rounded-lg border-none bg-red-500 px-3 text-white"
             onClick={() => handleBookDelete(book.id)}
