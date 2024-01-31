@@ -6,6 +6,7 @@ import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
 import { Book } from "../types/Book.ts";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 type AddBookModalProps = {
   saveBook: (bookToSave: Book) => void;
@@ -19,6 +20,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
   const [genre, setGenre] = useState<string>("");
   const [publicationDate, setPublicationDate] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [blurb, setBlurb] = useState<string>("");
 
   const onBookSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,6 +33,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
       genre: genre,
       publicationDate: publicationDate,
       imageUrl: imageUrl,
+      blurb: blurb,
     };
 
     props.saveBook(bookToSave);
@@ -40,11 +43,38 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
     setGenre("");
     setPublicationDate("");
     setImageUrl("");
+    setBlurb("");
+
+    setIsModalOpen(false);
+  };
+
+  const handleOnBlurIsbn = () => {
+    if (isModalOpen) {
+      axios
+        .get(`/api/googleBooks/${isbn}`)
+        .then((response) => {
+          setBlurb(response.data);
+        })
+        .catch(() => console.log("No Result for Google Books Api Request with given ISBN"));
+    }
   };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" color="neutral" onClick={() => setIsModalOpen(true)}>
+      <Button
+        variant="outlined"
+        color="neutral"
+        onClick={() => {
+          setTitle("");
+          setAuthor("");
+          setIsbn("");
+          setGenre("");
+          setPublicationDate("");
+          setImageUrl("");
+          setBlurb("");
+          setIsModalOpen(true);
+        }}
+      >
         Add new Book
       </Button>
       <Modal
@@ -59,19 +89,25 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
           <h2 className="mb-5 flex justify-center text-lg font-bold">Insert book information</h2>
           <form className="flex flex-col gap-3" onSubmit={onBookSubmit}>
             <div className="flex justify-between">
+              ISBN
+              <input
+                value={isbn}
+                onChange={(event) => setIsbn(event.target.value)}
+                onBlur={handleOnBlurIsbn}
+                placeholder=""
+              />
+            </div>
+            <div className="flex justify-between">
               Title <input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
               Author <input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
-              ISBN <input value={isbn} onChange={(event) => setIsbn(event.target.value)} placeholder="" />
-            </div>
-            <div className="flex justify-between">
               Genre <input value={genre} onChange={(event) => setGenre(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between gap-3">
-              Publication Date{" "}
+              Publication Date
               <input
                 value={publicationDate}
                 onChange={(event) => setPublicationDate(event.target.value)}
@@ -80,6 +116,16 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
             </div>
             <div className="flex justify-between">
               Image URL <input value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} placeholder="" />
+            </div>
+            <div className="flex justify-between">
+              Book Blurb
+              <textarea
+                value={blurb}
+                onChange={(event) => setBlurb(event.target.value)}
+                rows={5}
+                cols={20}
+                placeholder=""
+              />
             </div>
             <button type="submit">Save</button>
           </form>
