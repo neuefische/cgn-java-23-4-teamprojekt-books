@@ -60,7 +60,6 @@ function App() {
         <Route
           path="/books"
           element={<ViewAllBooks user={user} books={books} saveBook={addBook} updateUser={updateUser} />}
-
         />
         <Route path="/books/:id" element={<BookDetails deleteBook={deleteBook} editBook={editBook} />} />
         <Route path="/login" element={<Login />} />

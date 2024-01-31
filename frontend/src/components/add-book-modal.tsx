@@ -89,7 +89,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
           <h2 className="mb-5 flex justify-center text-lg font-bold">Insert book information</h2>
           <form className="flex flex-col gap-3" onSubmit={onBookSubmit}>
             <div className="flex justify-between">
-              ISBN{" "}
+              ISBN
               <input
                 value={isbn}
                 onChange={(event) => setIsbn(event.target.value)}
@@ -107,7 +107,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
               Genre <input value={genre} onChange={(event) => setGenre(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between gap-3">
-              Publication Date{" "}
+              Publication Date
               <input
                 value={publicationDate}
                 onChange={(event) => setPublicationDate(event.target.value)}
@@ -118,7 +118,7 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
               Image URL <input value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} placeholder="" />
             </div>
             <div className="flex justify-between">
-              Book Blurb{" "}
+              Book Blurb
               <textarea
                 value={blurb}
                 onChange={(event) => setBlurb(event.target.value)}
