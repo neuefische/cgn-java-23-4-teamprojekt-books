@@ -29,8 +29,7 @@ function App() {
   };
 
   const addBook = (bookToSave: Book) => {
-    axios.post("/api/books", bookToSave).then((response) => response.data);
-    setBooks([...books, bookToSave]);
+    axios.post("/api/books", bookToSave).then((response) => setBooks([...books, response.data]));
   };
 
   const deleteBook = (id: string) => {
