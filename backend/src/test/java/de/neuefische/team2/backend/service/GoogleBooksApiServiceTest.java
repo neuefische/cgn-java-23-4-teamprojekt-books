@@ -16,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
@@ -30,23 +32,27 @@ public class GoogleBooksApiServiceTest {
 
     private static MockWebServer mockWebServer;
 
-    private static GoogleBooksApiService googleBooksApiService;
+    @Autowired
+    private GoogleBooksApiService googleBooksApiService;
 
     @Autowired
     public MockMvc mockMvc;
+
+    @DynamicPropertySource
+    static void backendProperties(DynamicPropertyRegistry registry) {
+        registry.add("app.googleBooks.api.url", () -> mockWebServer.url("/").toString());
+    }
 
     @BeforeAll
     public static void setup() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-        googleBooksApiService = new GoogleBooksApiService("https://www.googleapis.com/books/v1", "someKey");
     }
 
     @AfterAll
     public static void cleanup() throws IOException {
         mockWebServer.shutdown();
     }
-
 
     @DirtiesContext
     @Test
@@ -56,11 +62,6 @@ public class GoogleBooksApiServiceTest {
                 .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                 .setBody("""
                         {
-                            "kind": "books#volumes",
-                                "totalItems": 2,
-                                "items": [
-                                    {
-                            "kind": "books#volumes",
                                 "totalItems": 2,
                                 "items": [
                                     {
@@ -301,7 +302,7 @@ public class GoogleBooksApiServiceTest {
                 .setBody("""
                         {
                             "kind": "books#volumes",
-                            "totalItems": 2,
+                            "totalItems": 2
                         }"""));
 
         //WHEN & THEN
