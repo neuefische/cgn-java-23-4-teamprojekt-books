@@ -53,6 +53,9 @@ export default function AddBookModal(props: Readonly<AddBookModalProps>) {
       axios
         .get(`/api/googleBooks/${isbn}`)
         .then((response) => {
+          setTitle(response.data.title);
+          setAuthor(response.data.authors[0]);
+          setImageUrl(response.data.imageLinks?.thumbnail || "");
           setBlurb(response.data.description);
         })
         .catch(() => console.log("No Result for Google Books Api Request with given ISBN"));
