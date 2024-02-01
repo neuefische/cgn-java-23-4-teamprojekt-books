@@ -22,9 +22,10 @@ export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
     genre: "Genre",
     publicationDate: "Publication Date",
     imageUrl: "Cover Image (URL)",
+    blurb: "Book Blurb",
   };
 
-  const onBookChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const onBookChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
     setLocalBook({ ...book, [event.target.name]: event.target.value });
   };
 
@@ -53,13 +54,24 @@ export const EditBookModal: React.FC<EditBookProps> = ({ book, editBook }) => {
             {(Object.keys(keyToNameMap) as [keyof typeof keyToNameMap]).map((key) => (
               <div key={key} className="flex justify-between">
                 <div>{keyToNameMap[key]}</div>
-                <input
-                  name={key}
-                  value={localBook[key]}
-                  type="text"
-                  onChange={onBookChange}
-                  placeholder={`${keyToNameMap[key]}...`}
-                />
+                {key !== "blurb" ? (
+                  <input
+                    name={key}
+                    value={localBook[key]}
+                    type="text"
+                    onChange={onBookChange}
+                    placeholder={`${keyToNameMap[key]}...`}
+                  />
+                ) : (
+                  <textarea
+                    name={key}
+                    value={localBook[key]}
+                    onChange={onBookChange}
+                    rows={5}
+                    cols={20}
+                    placeholder={`${keyToNameMap[key]}...`}
+                  />
+                )}
               </div>
             ))}
             <button type="submit">Edit book</button>

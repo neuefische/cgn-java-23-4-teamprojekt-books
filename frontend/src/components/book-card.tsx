@@ -12,6 +12,8 @@ type BookCardProps = {
   setFavourite: (id: string) => void;
 };
 
+const PLACEHOLDER_COVER = "/_44840dd6-d251-4f61-9cf9-33beb6cd95b2.png";
+
 export const BookCard: React.FC<BookCardProps> = ({ book, isFavourite, removeFavourite, setFavourite }) => {
   const toggleIsFavourite = (): void => {
     isFavourite ? removeFavourite(book.id) : setFavourite(book.id);
@@ -21,7 +23,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book, isFavourite, removeFav
     <div className="relative">
       <Link to={`/books/${book.id}`}>
         <div className="m-1 flex h-72 w-72 flex-col items-center justify-between rounded-md bg-border/10 p-5 shadow-card">
-          <img src={book.imageUrl} alt={book.title} className="h-3/5 select-none object-contain" />
+          <img src={book.imageUrl || PLACEHOLDER_COVER} alt={book.title} className="h-3/5 select-none object-contain" />
           <div className="flex flex-col items-center gap-0">
             <div className="text-center text-lg font-black">{book.title}</div>
             <div>{book.author}</div>
