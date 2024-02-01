@@ -11,10 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -58,5 +60,14 @@ class UserControllerIntegrationTest {
         // Verify interactions with mocked dependencies
         verify(usersRepo).save(updatedUser);
         verifyNoMoreInteractions(usersRepo, idService);
+    }
+
+
+    @Test
+    void testGetLoggedInUser_whenLoggedIn_Return() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user")
+                        .with(oidcLogin().userInfoToken(token -> token.claim("login", "test-user"))))
+                .andExpect(status().isOk())
+                .andExpect(content().string("testBody"));
     }
 }
