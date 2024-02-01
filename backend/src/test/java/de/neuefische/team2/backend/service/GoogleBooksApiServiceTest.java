@@ -10,15 +10,9 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,33 +20,24 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 public class GoogleBooksApiServiceTest {
 
     private static MockWebServer mockWebServer;
 
-    @Autowired
-    private GoogleBooksApiService googleBooksApiService;
-
-    @Autowired
-    public MockMvc mockMvc;
-
-    @DynamicPropertySource
-    static void backendProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.googleBooks.api.url", () -> mockWebServer.url("/").toString());
-    }
+    private static GoogleBooksApiService googleBooksApiService;
 
     @BeforeAll
     public static void setup() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
+        googleBooksApiService = new GoogleBooksApiService(mockWebServer.url("/").toString(), "someKey");
     }
 
     @AfterAll
     public static void cleanup() throws IOException {
         mockWebServer.shutdown();
     }
+
 
     @DirtiesContext
     @Test
@@ -62,6 +47,7 @@ public class GoogleBooksApiServiceTest {
                 .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                 .setBody("""
                         {
+                            "kind": "books#volumes",
                                 "totalItems": 2,
                                 "items": [
                                     {
@@ -200,15 +186,15 @@ public class GoogleBooksApiServiceTest {
                                                 "text": false,
                                                 "image": false
                                             },
-                                            "imageLinks": {
-                                                    "thumbnail": "http://books.google.com/books/content?id=SYu-4-oO3h8C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                                                },
                                             "maturityRating": "NOT_MATURE",
                                             "allowAnonLogging": false,
                                             "contentVersion": "preview-1.0.0",
                                             "panelizationSummary": {
                                                 "containsEpubBubbles": false,
                                                 "containsImageBubbles": false
+                                            },
+                                            "imageLinks": {
+                                                    "thumbnail": "http://books.google.com/books/content?id=SYu-4-oO3h8C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
                                             },
                                             "previewLink": "http://books.google.de/books?id=uJOOzwEACAAJ&dq=isbn:9780451524935+intitle:1984&hl=&as_pt=BOOKS&cd=1&source=gbs_api",
                                             "infoLink": "http://books.google.de/books?id=uJOOzwEACAAJ&dq=isbn:9780451524935+intitle:1984&hl=&as_pt=BOOKS&source=gbs_api",
@@ -248,15 +234,15 @@ public class GoogleBooksApiServiceTest {
                                                 "text": false,
                                                 "image": false
                                             },
-                                            "imageLinks": {
-                                                    "thumbnail": "http://books.google.com/books/content?id=SYu-4-oO3h8C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                                                },
                                             "maturityRating": "NOT_MATURE",
                                             "allowAnonLogging": false,
                                             "contentVersion": "preview-1.0.0",
                                             "panelizationSummary": {
                                                 "containsEpubBubbles": false,
                                                 "containsImageBubbles": false
+                                            },
+                                            "imageLinks": {
+                                                    "thumbnail": "http://books.google.com/books/content?id=SYu-4-oO3h8C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
                                             },
                                             "previewLink": "http://books.google.de/books?id=d3hA0AEACAAJ&dq=isbn:9780451524935+intitle:1984&hl=&as_pt=BOOKS&cd=2&source=gbs_api",
                                             "infoLink": "http://books.google.de/books?id=d3hA0AEACAAJ&dq=isbn:9780451524935+intitle:1984&hl=&as_pt=BOOKS&source=gbs_api",
