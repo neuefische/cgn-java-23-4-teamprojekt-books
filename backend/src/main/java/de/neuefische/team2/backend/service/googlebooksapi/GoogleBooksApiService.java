@@ -2,11 +2,14 @@ package de.neuefische.team2.backend.service.googlebooksapi;
 
 import de.neuefische.team2.backend.exception.NoSuchBookException;
 import de.neuefische.team2.backend.models.googlebooksapi.GoogleBooksResponse;
+import de.neuefische.team2.backend.models.googlebooksapi.ImageLinks;
 import de.neuefische.team2.backend.models.googlebooksapi.Item;
+import de.neuefische.team2.backend.models.googlebooksapi.VolumeInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ public class GoogleBooksApiService {
                 .build();
     }
 
-    public String getBookBlurb(String isbn, Optional<String> title) throws NoSuchBookException {
+    public VolumeInfo getVolumeInfo(String isbn, Optional<String> title) throws NoSuchBookException {
 
         GoogleBooksResponse response;
 
@@ -47,7 +50,7 @@ public class GoogleBooksApiService {
         Optional<Item> item = response.items().stream().max(Comparator.comparingInt(a ->
                 a.volumeInfo().description().length()));
 
-        return item.isPresent() ? item.get().volumeInfo().description() : "";
+        return item.isPresent() ? item.get().volumeInfo() : new VolumeInfo("", new ArrayList<>(), "", new ImageLinks(""));
 
     }
 }
